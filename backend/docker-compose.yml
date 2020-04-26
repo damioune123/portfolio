@@ -1,47 +1,22 @@
-version: '3.3'
+version: '3'
 
 services:
-#  mysql:
-#    container_name: mysql
-#    image: mariadb
-#    ports:
-#      - '3306'
-#    volumes:
-#      - ./mysql:/var/lib/mysql
-#    environment:
-#      - MYSQL_ROOT_PASSWORD=root
-#    restart: always
-#    networks:
-#      - nginxproxy_default
-#  wordpress:
-#    container_name: wp
-#    image: wordpress:latest
-#    ports:
-#      - '9000'
-#    volumes:
-#      - ./wordpress:/var/www/html
-#    environment:
-#      - WORDPRESS_DB_NAME=wordpress
-#      - WORDPRESS_TABLE_PREFIX=wpprefix_
-#      - WORDPRESS_DB_HOST=mysql
-#      - WORDPRESS_DB_PASSWORD=root
-#    depends_on:
-#      - mysql
-#    restart: always
-#    networks:
-#      - nginxproxy_default
-  whoami-1:
-    image: jwilder/whoami
+
+  blog:
+    image: ghost
+    container_name: blog
+    restart: unless-stopped
+    expose:
+      - "443"
+    volumes:
+      - /apps/blog/content:/var/lib/ghost/content
     environment:
-      - VIRTUAL_HOST=staging.damienmeur.be
-    networks:
-      - nginxproxy_default
-  whoami-2:
-    image: jwilder/whoami
-    environment:
-      - VIRTUAL_HOST=jenkins.damienmeur.be
-    networks:
-      - nginxproxy_default
+      VIRTUAL_HOST: staging.damienmeur.be,www.staging.damienmeur.be
+      VIRTUAL_PORT: 2368
+      LETSENCRYPT_HOST: staging.damienmeur.be,www.staging.damienmeur.be
+      LETSENCRYPT_EMAIL: damienmeur@gmail.com
+
 networks:
-  nginxproxy_default:
-    external: true
+  default:
+    external:
+      name: nginx-proxy
