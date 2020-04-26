@@ -1,0 +1,35 @@
+version: '3.3'
+
+services:
+  mysql:
+    container_name: mysql
+    image: mariadb
+    ports:
+      - '3306'
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    restart: always
+    networks:
+      - nginxproxy_default
+  wordpress:
+    container_name: wp
+    image: wordpress:latest
+    ports:
+      - '9000'
+    volumes:
+      - ./wordpress:/var/www/html
+    environment:
+      - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_TABLE_PREFIX=wpprefix_
+      - WORDPRESS_DB_HOST=mysql
+      - WORDPRESS_DB_PASSWORD=root
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      - nginxproxy_default
+networks:
+  nginxproxy_default:
+    external: true
