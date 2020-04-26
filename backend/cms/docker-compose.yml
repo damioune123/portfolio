@@ -21,7 +21,6 @@ services:
       - db_data:/var/lib/mysql
     restart: unless-stopped
     environment:
-      VIRTUAL_PORT: 3306
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress
       MYSQL_USER: wordpress
@@ -31,8 +30,6 @@ services:
     depends_on:
       - db
     image: wordpress:latest
-    ports:
-      - "8000:443"
     expose:
       - "443"
     restart: unless-stopped
@@ -42,7 +39,6 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
       VIRTUAL_HOST: staging.damienmeur.be,www.staging.damienmeur.be
-      VIRTUAL_PORT: 2369
       LETSENCRYPT_HOST: staging.damienmeur.be,www.staging.damienmeur.be
       LETSENCRYPT_EMAIL: damienmeur@gmail.com
       
