@@ -6,7 +6,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./certs:/etc/nginx/certs
+      - /certs/:/etc/nginx/certs
       - /var/run/docker.sock:/tmp/docker.sock:ro
     restart: unless-stopped
 networks:
