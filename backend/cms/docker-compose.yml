@@ -9,7 +9,7 @@ services:
     expose:
       - "443"
     volumes:
-      - /apps/blog/content:/var/lib/ghost/content
+      - /root/app/content:/var/lib/ghost/content
     environment:
       VIRTUAL_HOST: staging.damienmeur.be,www.staging.damienmeur.be
       VIRTUAL_PORT: 2368
