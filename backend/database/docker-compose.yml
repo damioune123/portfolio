@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  db:
+    container_name: ${CONTAINER_DB_NAME}
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  pma:
+    container_name: ${CONTAINER_ADMIN_NAME}
+    restart: unless-stopped
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:8080"
+    environment:
+      VIRTUAL_HOST: ${DOMAINS}
+      LETSENCRYPT_HOST: ${DOMAINS}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      PMA_HOST: ${CONTAINER_DB_NAME}
+
+volumes:
+  db:
+
+networks:
+    default:
+       external:
+         name: ${NETWORK}
