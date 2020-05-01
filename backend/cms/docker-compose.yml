@@ -26,7 +26,7 @@ services:
       MYSQL_USER: wordpress
       MYSQL_PASSWORD: wordpress
 
-  wordpress:
+  staging-wordpress:
     depends_on:
       - db
     image: wordpress:latest
@@ -35,11 +35,26 @@ services:
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
-      VIRTUAL_HOST: staging.damienmeur.be,www.staging.damienmeur.be
-      LETSENCRYPT_HOST: staging.damienmeur.be,www.staging.damienmeur.be
+      WORDPRESS_DB_USER: wordpress-staging
+      WORDPRESS_DB_PASSWORD: wordpress-staging
+      WORDPRESS_DB_NAME: staging-wordpress
+      VIRTUAL_HOST: staging.wordpress.damienmeur.be,www.staging.wordpress.damienmeur.be
+      LETSENCRYPT_HOST: staging.wordpress.damienmeur.be,www.staging.wordpress.damienmeur.be
+      LETSENCRYPT_EMAIL: damienmeur@gmail.com
+  production-wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    expose:
+      - "443"
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress-production
+      WORDPRESS_DB_PASSWORD: wordpress-production
+      WORDPRESS_DB_NAME: production-wordpress
+      VIRTUAL_HOST: wordpress.damienmeur.be,www.wordpress.damienmeur.be
+      LETSENCRYPT_HOST: wordpress.damienmeur.be,www.wordpress.damienmeur.be
       LETSENCRYPT_EMAIL: damienmeur@gmail.com
       
 volumes:
