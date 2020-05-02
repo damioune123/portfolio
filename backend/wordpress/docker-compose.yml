@@ -5,24 +5,34 @@ services:
      container_name: ${CONTAINER_WP_NAME}
      image: wordpress:latest
      restart: unless-stopped
+     expose:
+       - 80
+       - 443
      volumes:
        - core:/var/www/html
        - content:/var/www/html/wp-content
+     labels:
+       - "traefik.port=80"
+       - "traefik.backend="${TRAEFIK_BACKEND}
+       - "traefik.frontend.rule=Host:"${DOMAINS}
+       - "traefik.docker.network=proxy"
+     networks:
+       - web
+       - internal
      environment:
        WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME}
        WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
        WORDPRESS_DB_USER: ${MYSQL_USER}
        WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
        WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
-       VIRTUAL_HOST: ${DOMAINS}
-       LETSENCRYPT_HOST: ${DOMAINS}
-       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL} 
 
 volumes:
   core:
   content:
 
 networks:
-    default:
-       external:
-         name: ${NETWORK}
+  proxy:
+    external:
+      name: web
+  internal:
+    driver: bridge
