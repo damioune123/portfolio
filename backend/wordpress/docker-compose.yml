@@ -14,7 +14,7 @@ services:
        - "traefik.http.routers.${CONTAINER_WP_NAME}.tls.certresolver=letsencrypt"
      networks:
        - web
-       - internal
+       - db_network
      environment:
        WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME}
        WORDPRESS_DB_NAME: ${MYSQL_DATABASE}

@@ -8,7 +8,7 @@ services:
     volumes:
       - db:/var/lib/mysql
     networks:
-      - internal
+      - db_network
     labels:
       - "traefik.enable=false"
     environment:
@@ -23,7 +23,7 @@ services:
       - "traefik.http.routers.adminer.entrypoints=secure"
       - "traefik.http.routers.adminer.tls.certresolver=letsencrypt"
     networks:
-      - internal
+      - db_network
       - web
     depends_on:
       - mariadb
