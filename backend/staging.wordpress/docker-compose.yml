@@ -29,4 +29,4 @@ networks:
   web:
     external: true
   db_network:
-    external: false
+    external: true
