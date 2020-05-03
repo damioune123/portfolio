@@ -4,7 +4,6 @@ services:
   whoami:
     image: "containous/whoami"
     container_name: "simple-service"
-
     labels:
       - "traefik.http.routers.whoami.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.whoami.entrypoints=secure"
