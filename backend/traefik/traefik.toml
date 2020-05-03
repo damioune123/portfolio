@@ -1,16 +1,26 @@
 [log]
   level = "DEBUG"
+
 [global]
   sendAnonymousUsage = false
+
 [entryPoints]
   [entryPoints.insecure]
     address = ":80"
   [entryPoints.secure]
     address = ":443"
+
+# Redirect to https
+[http.middlewares]
+  [http.middlewares.test-redirectscheme.redirectScheme]
+    scheme = "https"
+    permanent = true
+
 [api]
   dashboard = true
   debug = false
   insecure = true
+
 [providers]
   [providers.docker]
     endpoint ="unix:///var/run/docker.sock"
@@ -18,6 +28,7 @@
     exposedByDefault = true
     swarmMode = false
     network="web"
+
 [certificatesResolvers.letsencrypt.acme]
   email="damienmeur@gmail.com"
   storage="/letsencrypt/acme.json"
