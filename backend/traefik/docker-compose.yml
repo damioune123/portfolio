@@ -9,11 +9,12 @@ services:
       - "443:443"
     labels:
       # HTTP to HTTPS redirection
-      - "traefik.http.routers.http_catchall.rule=HostRegexp(`{any:.+}`)"
-      - "traefik.http.routers.http_catchall.entrypoints=insecure"
-      - "traefik.http.routers.http_catchall.middlewares=https_redirect"
-      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=secure"
-      - "traefik.http.middlewares.https_redirect.redirectscheme.permanent=true"
+      # middleware redirect
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      # global redirect to https
+      - "traefik.http.routers.redirs.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.redirs.entrypoints=web"
+      - "traefik.http.routers.redirs.middlewares=redirect-to-https"
       # Docker labels for enabling Traefik dashboard
       - "traefik.http.routers.traefik.rule=Host(`${MONITOR_DOMAIN}`)"
       - "traefik.http.routers.traefik.entrypoints=secure"
