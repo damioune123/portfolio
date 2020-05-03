@@ -1,0 +1,40 @@
+[log]
+  level = "DEBUG"
+defaultEntryPoints = ["http", "https"]
+[entryPoints]
+  [entryPoints.dashboard]
+    address = ":8080"
+    [entryPoints.dashboard.auth]
+      [entryPoints.dashboard.auth.basic]
+        users = ["admin:$apr1$kvjGzOke$xtmDj9AkRDPFWIOLskcDC."]
+  [entryPoints.http]
+    address = ":80"
+      [entryPoints.http.redirect]
+        entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+      [entryPoints.https.tls]
+
+[api]
+entrypoint="dashboard"
+
+[providers]
+docker="dashboard"
+insecure="true"
+
+[providers.docker]
+  exposedByDefault = false
+
+[docker]
+domain = "damienmeur.com"
+watch = true
+
+[certificatesResolvers]
+  [myResolverName]
+    [acme]
+      email = "damienmeur@gmail.com"
+      storage = "acme.json"
+      caserver = "https://acme-staging-v02.api.letsencrypt.org/directory"
+      [dnsChallenge]
+        provider= "ovh"
+        delayBeforeCheck= 10

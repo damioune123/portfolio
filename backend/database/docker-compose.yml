@@ -1,34 +1,39 @@
 version: '3'
 
 services:
-  db:
+  mariadb:
     container_name: ${CONTAINER_DB_NAME}
     image: mariadb:latest
     restart: unless-stopped
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - internal
+    labels:
+      - "traefik.enable=false"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-  pma:
-    container_name: ${CONTAINER_ADMIN_NAME}
-    restart: unless-stopped
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8081:8080"
-    environment:
-      VIRTUAL_HOST: ${DOMAINS}
-      LETSENCRYPT_HOST: ${DOMAINS}
-      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      PMA_HOST: ${CONTAINER_DB_NAME}
+  adminer:
+    image: adminer:4.6.3-standalone
+    labels:
+      - "traefik.backend=${PMA_TRAEFIK_BACKEND}"
+      - "traefik.frontend.rule=Host:${PMA_DOMAIN}"
+      - "traefik.docker.network=web"
+      - "traefik.port=8080"
+    networks:
+      - internal
+      - web
+    depends_on:
+      - mariadb
 
 volumes:
   db:
 
 networks:
-    default:
-       external:
-         name: ${NETWORK}
+  web:
+    external: true
+  internal:
+    external: false

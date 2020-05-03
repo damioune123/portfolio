@@ -1,28 +1,36 @@
 version: '3'
 
 services:
-   wordpress:
-     container_name: ${CONTAINER_WP_NAME}
-     image: wordpress:latest
-     restart: unless-stopped
-     volumes:
-       - core:/var/www/html
-       - content:/var/www/html/wp-content
-     environment:
-       WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME}
-       WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-       WORDPRESS_DB_USER: ${MYSQL_USER}
-       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
-       VIRTUAL_HOST: ${DOMAINS}
-       LETSENCRYPT_HOST: ${DOMAINS}
-       LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL} 
+  wordpress:
+    container_name: ${CONTAINER_WP_NAME}
+    image: wordpress:latest
+    restart: unless-stopped
+    volumes:
+      - core:/var/www/html
+      - content:/var/www/html/wp-content
+    labels:
+      - "traefik.port=80"
+      - "traefik.backend=${TRAEFIK_BACKEND}"
+      - "traefik.frontend.rule=Host:${DOMAIN}"
+      - "traefik.docker.network=web"
+    networks:
+      - web
+      - internal
+    environment:
+      WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+    depends_on:
+      - ${CONTAINER_DB_NAME}
 
 volumes:
   core:
   content:
 
 networks:
-    default:
-       external:
-         name: ${NETWORK}
+  web:
+    external: true
+  internal:
+    external: false
