@@ -20,7 +20,7 @@
     network="web"
 [certificatesResolvers.letsencrypt.acme]
   email="damienmeur@gmail.com"
-  storage="acme.json"
+  storage="/letsencrypt/acme.json"
   #staging ca-server
   caserver="https://acme-staging-v02.api.letsencrypt.org/directory"
   #production ca-server
