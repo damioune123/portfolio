@@ -8,7 +8,7 @@ services:
     volumes:
       - "./wordpress-files:/var/www/html"
       - "./wp-content:/var/www/html/wp-content"
-      - "./htaccess/.htaccess:/var/www/html/.htaccess"
+      - ./htaccess/.htaccess:/var/www/html/.htaccess:ro
       - "./custom-plugins/house-projects.php:/var/www/html/wp-content/plugins/house-projects.php"
     labels:
       - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
