@@ -22,8 +22,7 @@ dashboard=true
 [providers.docker]
   exposedByDefault = false
 
-[certificatesResolvers]
-  [myResolverName]
+[certificatesResolvers.myResolverName]
     [acme]
       email = "damienmeur@gmail.com"
       storage = "acme.json"
