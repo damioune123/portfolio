@@ -10,11 +10,9 @@
   [entryPoints.secure]
     address = ":443"
 
-
 [api]
   dashboard = true
-  debug = false
-  insecure = true
+  insecure = false
 
 [providers]
   [providers.docker]
@@ -25,10 +23,11 @@
     network="web"
   [providers.file]
     directory = "/dynamic/"
+
 [certificatesResolvers.letsencrypt.acme]
   email="damienmeur@gmail.com"
   storage="/letsencrypt/acme.json"
-  #staging ca-server
+  #staging ca-server - for testing SSL CA requests without rate limiting
   #caserver="https://acme-staging-v02.api.letsencrypt.org/directory"
   #production ca-server
   caserver = "https://acme-v02.api.letsencrypt.org/directory"
