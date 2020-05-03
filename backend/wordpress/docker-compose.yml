@@ -9,10 +9,9 @@ services:
        - core:/var/www/html
        - content:/var/www/html/wp-content
      labels:
-       - "traefik.port=80"
-       - "traefik.backend=${TRAEFIK_BACKEND}"
-       - "traefik.frontend.rule=Host:${DOMAIN}"
-       - "traefik.docker.network=web"
+       - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
+       - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
+       - "traefik.http.routers.${CONTAINER_WP_NAME}.tls.certresolver=letsencrypt"
      networks:
        - web
        - internal

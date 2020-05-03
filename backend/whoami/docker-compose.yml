@@ -5,10 +5,9 @@ services:
     image: "containous/whoami"
     container_name: "simple-service"
     labels:
-      - "traefik.port=80"
-      - "traefik.backend=${TRAEFIK_BACKEND}"
-      - "traefik.frontend.rule=Host:${DOMAIN}"
-      - "traefik.docker.network=web"
+      - "traefik.http.routers.whoami.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.whoami.entrypoints=secure"
+      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
 
 networks:
   web:

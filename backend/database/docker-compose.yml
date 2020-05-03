@@ -19,10 +19,9 @@ services:
   adminer:
     image: adminer:4.6.3-standalone
     labels:
-      - "traefik.backend=${PMA_TRAEFIK_BACKEND}"
-      - "traefik.frontend.rule=Host:${PMA_DOMAIN}"
-      - "traefik.docker.network=web"
-      - "traefik.port=8080"
+      - "traefik.http.routers.adminer.rule=Host(`${ADMINER_DOMAIN}`)"
+      - "traefik.http.routers.adminer.entrypoints=secure"
+      - "traefik.http.routers.adminer.tls.certresolver=letsencrypt"
     networks:
       - internal
       - web

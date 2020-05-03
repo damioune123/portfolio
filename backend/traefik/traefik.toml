@@ -1,32 +1,32 @@
 [log]
   level = "DEBUG"
-defaultEntryPoints = ["http", "https"]
+
+[global]
+  sendAnonymousUsage = false
+
 [entryPoints]
-  [entryPoints.dashboard]
-    address = ":8080"
-    [entryPoints.dashboard.auth]
-      [entryPoints.dashboard.auth.basic]
-        users = ["admin:$apr1$kvjGzOke$xtmDj9AkRDPFWIOLskcDC."]
-  [entryPoints.http]
+  [entryPoints.insecure]
     address = ":80"
-      [entryPoints.http.redirect]
-        entryPoint = "https"
-  [entryPoints.https]
+  [entryPoints.secure]
     address = ":443"
-      [entryPoints.https.tls]
 
 [api]
-insecure=true
-dashboard=true
+  dashboard = true
+  debug = false
+  insecure = true
 
-[providers.docker]
-  exposedByDefault = false
+[providers]
+  [providers.docker]
+    endpoint ="unix:///var/run/docker.sock"
+    watch = true
+    exposedByDefault = false
+    swarmMode = false
+    network="web"
 
-[certificatesResolvers.myResolverName]
-    [acme]
-      email = "damienmeur@gmail.com"
-      storage = "acme.json"
-      caserver = "https://acme-staging-v02.api.letsencrypt.org/directory"
-      [dnsChallenge]
-        provider= "ovh"
-        delayBeforeCheck= 10
+[certificatesResolvers.letsencrypt.acme]
+  email = "damienmeur@gmail.com"
+  storage = "acme.json"
+  caserver = "https://acme-staging-v02.api.letsencrypt.org/directory"
+  [dnsChallenge]
+    provider= "ovh"
+    delayBeforeCheck= 10

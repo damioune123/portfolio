@@ -8,8 +8,22 @@ services:
       - "80:80"
       - "443:443"
     labels:
-      - "traefik.frontend.rule=Host:${MONITOR_DOMAIN}"
-      - "traefik.port=8080"
+      # HTTP to HTTPS redirection
+      - "traefik.http.routers.http_catchall.rule=HostRegexp(`{any:.+}`)"
+      - "traefik.http.routers.http_catchall.entrypoints=insecure"
+      - "traefik.http.routers.http_catchall.middlewares=https_redirect"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.scheme=secure"
+      - "traefik.http.middlewares.https_redirect.redirectscheme.permanent=true"
+      # Docker labels for enabling Traefik dashboard
+      - "traefik.http.routers.traefik.rule=Host(`${MONITOR_DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=secure"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      #Declare a new middleware named monitor-basic-auth of type basicauth
+      #Password generated using htpasswd utility
+      - "traefik.http.middlewares.traefik-basic-auth.basicauth.users=admin:$apr1$kvjGzOke$xtmDj9AkRDPFWIOLskcDC."
+      #Link declared middleware to router
+      - "traefik.http.routers.traefik.middlewares=traefik-basic-auth"
     environment:
       - "OVH_ENDPOINT=${OVH_ENDPOINT}"
       - "OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}"
@@ -19,8 +33,8 @@ services:
       - "./traefik.toml:/traefik.toml"
       - "./acme.json:/acme.json"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-    networks:
-      - web
+
 networks:
-  web:
-    external: true
+  default:
+    external:
+      name: "web"
