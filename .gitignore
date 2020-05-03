@@ -1,3 +1,6 @@
 .idea/
-.env/
+.env
 acme.json
+node_modules/
+*.log
+build/

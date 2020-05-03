@@ -1,0 +1,15 @@
+version: '3'
+services:
+  express_static_production:
+    build:
+      context: .
+      dockerfile: ./production.Dockerfile
+    labels:
+      - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
+      - "traefik.http.routers.${CONTAINER_WP_NAME}.tls.certresolver=letsencrypt"
+    networks:
+      - web
+networks:
+  web:
+    external: true
