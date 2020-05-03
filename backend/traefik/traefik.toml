@@ -22,9 +22,9 @@
   email="damienmeur@gmail.com"
   storage="/letsencrypt/acme.json"
   #staging ca-server
-  caserver="https://acme-staging-v02.api.letsencrypt.org/directory"
+  #caserver="https://acme-staging-v02.api.letsencrypt.org/directory"
   #production ca-server
-  #caserver = "https://acme-v02.api.letsencrypt.org/directory"
+  caserver = "https://acme-v02.api.letsencrypt.org/directory"
   [certificatesResolvers.letsencrypt.acme.dnsChallenge]
     provider="ovh"
     delayBeforeCheck= 0
