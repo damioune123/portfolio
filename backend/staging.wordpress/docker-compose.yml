@@ -6,8 +6,8 @@ services:
     image: wordpress:latest
     restart: unless-stopped
     volumes:
-      - "./core:/var/www/html"
-      - "./content:/var/www/html/wp-content"
+      - "core:/var/www/html:rw"
+      - "./wp-content:/var/www/html/wp-content"
     labels:
       - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
@@ -21,7 +21,8 @@ services:
       WORDPRESS_DB_USER: ${MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
       WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
-
+volumes:
+  core:
 networks:
   web:
     external: true
