@@ -23,7 +23,8 @@
     exposedByDefault = true
     swarmMode = false
     network="web"
-
+  [providers.file]
+    directory = "/dynamic/"
 [certificatesResolvers.letsencrypt.acme]
   email="damienmeur@gmail.com"
   storage="/letsencrypt/acme.json"
