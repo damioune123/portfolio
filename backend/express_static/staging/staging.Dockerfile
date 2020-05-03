@@ -5,5 +5,5 @@ COPY . .
 RUN cd frontend # && npm i && npm run build:staging
 WORKDIR backend/express_static
 RUN  npm i
-EXPOSE $PORT
+EXPOSE 80
 CMD npm run start

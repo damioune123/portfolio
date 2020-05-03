@@ -15,7 +15,7 @@ app.use(express.static(path.normalize(path.join(__dirname,'../../frontend/build'
 
 module.exports = app;
 
-const port = process.env.PORT || 50;
+const port = 80;
 // Create a Node.js based http server on port 80
 http.listen(port,()=>{
     console.log('listening on *:'+port);
