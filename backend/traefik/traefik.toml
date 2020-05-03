@@ -10,15 +10,11 @@
   [entryPoints.secure]
     address = ":443"
 
-# Redirect to https
 [http.middlewares]
   [http.middlewares.test-redirectscheme.redirectScheme]
     scheme = "https"
+    port = 443
     permanent = true
-
-[http.middlewares]
-  [http.middlewares.test-redirectscheme.redirectScheme]
-    scheme = "https"
 
 [api]
   dashboard = true
