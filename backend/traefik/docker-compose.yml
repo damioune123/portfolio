@@ -22,6 +22,5 @@ services:
     networks:
       - web
 networks:
-  default:
-    external:
-      name: ${NETWORK:-webproxy}
+  web:
+    external: true
