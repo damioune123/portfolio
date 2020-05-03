@@ -3,7 +3,7 @@ services:
   express_static_production:
     build:
       context: ..
-      dockerfile: ./production/production.Dockerfile
+      dockerfile: ./staging/staging.Dockerfile
     labels:
       - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
