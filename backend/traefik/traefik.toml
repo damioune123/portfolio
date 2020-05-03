@@ -24,12 +24,13 @@
     network="web"
 
 [certificatesResolvers.letsencrypt.acme]
-  email = "damienmeur@gmail.com"
-  storage = "acme.json"
+  email="damienmeur@gmail.com"
+  storage="acme.json"
   #staging ca-server
-  caserver = "https://acme-staging-v02.api.letsencrypt.org/directory"
+  caserver="https://acme-staging-v02.api.letsencrypt.org/directory"
   #production ca-server
   #caserver = "https://acme-v02.api.letsencrypt.org/directory"
   [certificatesResolvers.letsencrypt.acme.dnsChallenge]
-    provider= "ovh"
+    provider="ovh"
+    resolvers="1.1.1.1:53,8.8.8.8:53"
     delayBeforeCheck= 0
