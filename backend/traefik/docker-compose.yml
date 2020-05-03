@@ -21,7 +21,7 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
       #Declare a new middleware named monitor-basic-auth of type basicauth
       #Password generated using htpasswd utility
-      - "traefik.http.middlewares.traefik-basic-auth.basicauth.users=admin:$apr1$kvjGzOke$xtmDj9AkRDPFWIOLskcDC."
+      - "traefik.http.middlewares.traefik-basic-auth.basicauth.users=${DASHBOARD_BASIC_AUTH}"
       #Link declared middleware to router
       - "traefik.http.routers.traefik.middlewares=traefik-basic-auth"
     environment:
