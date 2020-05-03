@@ -5,9 +5,9 @@ services:
       context: ../../../
       dockerfile: ./backend/express_static/production/production.Dockerfile
     labels:
-      - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
-      - "traefik.http.routers.${CONTAINER_WP_NAME}.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.production_frontend.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.production_frontend.entrypoints=secure"
+      - "traefik.http.routers.production_frontend.tls.certresolver=letsencrypt"
     networks:
       - web
 networks:
