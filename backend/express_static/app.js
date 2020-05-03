@@ -11,7 +11,7 @@ const http = require('http').createServer(app);
 app.use(cors());
 
 // Serve static html, js, css, and image files from the built frontend 'build'
-app.use(express.static(path.normalize(path.join(__dirname,'../frontend/build'))));
+app.use(express.static(path.normalize(path.join(__dirname,'../../frontend/build'))));
 
 module.exports = app;
 
