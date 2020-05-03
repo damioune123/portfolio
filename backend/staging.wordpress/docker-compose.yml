@@ -28,5 +28,5 @@ volumes:
 networks:
   web:
     external: true
-  internal:
+  db_network:
     external: false
