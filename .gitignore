@@ -4,3 +4,5 @@ acme.json
 node_modules/
 *.log
 build/
+wordpress_files/
+wp-content/
