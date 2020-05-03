@@ -16,6 +16,10 @@
     scheme = "https"
     permanent = true
 
+[http.middlewares]
+  [http.middlewares.test-redirectscheme.redirectScheme]
+    scheme = "https"
+
 [api]
   dashboard = true
   debug = false
