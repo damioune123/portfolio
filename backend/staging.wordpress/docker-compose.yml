@@ -7,6 +7,7 @@ services:
     restart: unless-stopped
     volumes:
       - "./wordpress-files:/var/www/html"
+      - "./wp-content:/var/www/html/wp-content"
     labels:
       - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
