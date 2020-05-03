@@ -8,8 +8,8 @@ services:
     volumes:
       - "./wordpress-files:/var/www/html"
       - "./wp-content:/var/www/html/wp-content"
-      - "./custom-plugins/house-projects.php:/var/www/html/wp-content/plugins/house-projects.php"
-
+      - "./htaccess/.htaccess:/var/www/html/.htaccess"
+      - "./custom-plugins/house-projects.php:/var/www/html/wp-content/plugins/house-projects.php"ls -
     labels:
       - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
