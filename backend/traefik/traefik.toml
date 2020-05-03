@@ -27,6 +27,6 @@
   email = "damienmeur@gmail.com"
   storage = "acme.json"
   caserver = "https://acme-staging-v02.api.letsencrypt.org/directory"
-  [dnschallenge]
+  [dnsChallenge]
     provider= "ovh"
-    delayBeforeCheck= 10
+    delayBeforeCheck= 0
