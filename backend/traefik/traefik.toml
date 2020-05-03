@@ -16,18 +16,11 @@ defaultEntryPoints = ["http", "https"]
       [entryPoints.https.tls]
 
 [api]
-entrypoint="dashboard"
-
-[providers]
-docker="dashboard"
-insecure="true"
+insecure=true
+dashboard=true
 
 [providers.docker]
   exposedByDefault = false
-
-[docker]
-domain = "damienmeur.com"
-watch = true
 
 [certificatesResolvers]
   [myResolverName]
