@@ -5,10 +5,10 @@ services:
     container_name: ${CONTAINER_WP_NAME}
     build:
       context: ..
-      dockerfile: ../Dockerfile
+      dockerfile: ./Dockerfile
     restart: unless-stopped
     volumes:
-      - "./wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
+      - "../wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
     labels:
       - "traefik.http.routers.${CONTAINER_WP_NAME}.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.${CONTAINER_WP_NAME}.entrypoints=secure"
