@@ -8,8 +8,7 @@ services:
       - "traefik.http.routers.staging_frontend.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.staging_frontend.entrypoints=secure"
       - "traefik.http.routers.staging_frontend.tls.certresolver=letsencrypt"
-    networks:
-      - web
 networks:
-  web:
-    external: true
+  default:
+    external:
+      name: "web"

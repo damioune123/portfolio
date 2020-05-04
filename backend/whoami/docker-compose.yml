@@ -8,9 +8,8 @@ services:
       - "traefik.http.routers.whoami.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.whoami.entrypoints=secure"
       - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
-    networks:
-      - web
 
 networks:
-  web:
-    external: true
+  default:
+    external:
+      name: "web"
