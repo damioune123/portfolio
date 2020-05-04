@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  wordpress:
+  wordpress_staging:
     container_name: ${CONTAINER_WP_NAME}
     build:
-      context: .
-      dockerfile: ./Dockerfile
+      context: ..
+      dockerfile: ../Dockerfile
     restart: unless-stopped
     volumes:
       - "./wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"

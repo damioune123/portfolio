@@ -43,4 +43,4 @@
 ` flush PRIVILEGES;`
 ` exit`
 11. Launch whoami, wordpress and wordpress staging containers
-`sudo docker-compose up -d in each of their respective directory`
+`sudo docker-compose up -d in each of their respective directory (where a docker-compose.yml file is present)`
