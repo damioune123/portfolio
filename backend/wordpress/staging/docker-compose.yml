@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  wordpress_production:
+  wordpress_staging:
     container_name: ${CONTAINER_WP_NAME}
     build:
       context: ..
