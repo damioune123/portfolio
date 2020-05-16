@@ -28,21 +28,28 @@ class AjaxRequests {
     // API REQUESTS
     getHomes = ()=> {
         return new Promise(async (resolve)=> {
-            await this.sleep(5000);
+            await this.sleep(1000);
             return resolve({data: {homes: mockData.homes }})
         })
     };
 
     getRealtors = ()=> {
         return new Promise(async (resolve)=> {
-            await this.sleep(5000);
+            await this.sleep(1000);
             return resolve({data: {realtors: mockData.realtors }})
+        })
+    };
+
+    getGalleryItems = ()=> {
+        return new Promise(async (resolve)=> {
+            await this.sleep(1000);
+            return resolve({data: {galleryItems: mockData.galleryItems }})
         })
     };
 
     getMetaData = ()=> {
         return new Promise(async (resolve)=> {
-            await this.sleep(5000);
+            await this.sleep(1000);
             return resolve({data: {metaData: mockData.metaData }})
         })
     };
