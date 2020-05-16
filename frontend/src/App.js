@@ -3,7 +3,7 @@ import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter,Route,Switch} from 'react-router-dom';
 import HomePage from './components/Homepage/HomePage';
 import ContactPage from './components/Contact/ContactPage/ContactPage';
-
+import './sass/main.scss';
 class App extends Component {
   render() {
     return (
