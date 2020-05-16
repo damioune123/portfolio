@@ -1,10 +1,11 @@
 import {
-    POST_CONTACT_SUCCESS,
-    POST_CONTACT_FAILURE
-} from "../actions/contactActions";
+    GET_HOMES,
+    GET_HOMES_SUCCESS,
+    GET_HOMES_FAILURE
+} from "../actions/homeActions";
 
 const initialState = {
-    contact: null,
+    homes: null,
     loading: false,
     error: null
 };
@@ -14,19 +15,26 @@ export default function contactReducer(
     action
 ) {
     switch (action.type) {
-        case POST_CONTACT_SUCCESS:
+        case GET_HOMES:
+            return {
+                ...state,
+                loading: true,
+                homes: null,
+                error: null
+            };
+        case GET_HOMES_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                contact: action.payload.contact
+                homes: action.payload.homes
             };
 
-        case POST_CONTACT_FAILURE:
+        case GET_HOMES_FAILURE:
             return {
                 ...state,
                 loading: false,
                 error: action.payload.error,
-                contact: null
+                homes: null
             };
 
         default:

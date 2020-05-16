@@ -1,4 +1,5 @@
 import axios from 'axios';
+import mockData from "./mockData";
 class AjaxRequests {
     /**
      *
@@ -23,10 +24,15 @@ class AjaxRequests {
         );
     };
 
+    sleep = m => new Promise(r => setTimeout(r, m));
     // API REQUESTS
-    createContact = (values)=>{
-        return this.axiosRequest.post('/contacts', values);
+    getHomes = ()=> {
+        return new Promise(async (resolve)=> {
+            await this.sleep(10000);
+            return resolve({data: {homes: mockData.homes }})
+        })
     }
+
 }
 const ajaxRequest = new AjaxRequests();
 ajaxRequest.init();

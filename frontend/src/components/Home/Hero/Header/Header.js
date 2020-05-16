@@ -35,8 +35,9 @@ const seenOnLogos = [
 class Header extends Component{
     render(){
         const renderListOfSeenOnLogos= () => {
-            return seenOnLogos.map ((seenOnLogo) =>
+            return seenOnLogos.map ((seenOnLogo,index) =>
                 <img
+                    key={index}
                     src={seenOnLogo.img}
                     alt={seenOnLogo.alt}
                 />);

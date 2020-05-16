@@ -1,8 +1,8 @@
 import { all, call } from 'redux-saga/effects';
-import { watchPostContact } from './contactSaga';
+import { watchGetHomes } from './homeSaga';
 
 export default function* rootSaga() {
     yield all([
-        call(watchPostContact)
+        call(watchGetHomes)
     ]);
 }
