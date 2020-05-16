@@ -5,10 +5,21 @@ import House3Img from "../img/house-3.jpeg";
 import House4Img from "../img/house-4.jpeg";
 import House5Img from "../img/house-5.jpeg";
 import House6Img from "../img/house-6.jpeg";
+
 //REALTORS IMG
 import Realtor1Img from "../img/realtor-1.jpeg";
 import Realtor2Img from "../img/realtor-2.jpeg";
 import Realtor3Img from "../img/realtor-3.jpeg";
+
+//METADATA IMG
+import LogoImg from "../img/logo.png";
+import SeenOnLogo1 from "../img/logo-bbc.png";
+import SeenOnLogo2 from "../img/logo-forbes.png";
+import SeenOnLogo3 from "../img/logo-techcrunch.png";
+import SeenOnLogo4 from "../img/logo-bi.png";
+import SpriteSvg from "../img/sprite.svg";
+import StoryImg1 from "../img/story-1.jpeg";
+import StoryImg2 from "../img/story-2.jpeg";
 
 //HOME MOCK DATA
 const homes = [
@@ -89,7 +100,104 @@ const realtors = [
     sold: 254
   },
 ];
+
+//METADATA MOCK DATA
+const metaData = {
+  galleryItemMetaData: {
+    altBase: "Gallery image"
+  },
+  realtorMetaData:{
+    housesSoldText: "houses sold"
+  },
+  homeMetaData: {
+    btnText: "Contact realtor",
+    heartFullIcon: SpriteSvg+"#icon-heart-full",
+    mapPinIcon: SpriteSvg+"#icon-map-pin",
+    profileMaleIcon: SpriteSvg+"#icon-profile-male",
+    expandIcon: SpriteSvg+"#icon-expand",
+    keyIcon: SpriteSvg+"#icon-key"
+  },
+  headerMetaData: {
+    logoImg: LogoImg,
+    logoAlt: "Nexter logo",
+    heading3: "Your own home:",
+    heading1: "The ultimate personal freedom",
+    btnText: "View our properties",
+    seenOnText: "Seen on",
+    seenOnLogos: [
+      {
+        img: SeenOnLogo1,
+        alt: "Seen on logo 1"
+      },
+      {
+        img: SeenOnLogo2,
+        alt: "Seen on logo 2"
+      },
+      {
+        img: SeenOnLogo3,
+        alt: "Seen on logo 3"
+      },
+      {
+        img: SeenOnLogo4,
+        alt: "Seen on logo 4"
+      }
+    ]
+  },
+  featuresMetaData: {
+    features:[
+      {
+        icon: SpriteSvg+"#icon-global",
+        title: "World's best luxury homes",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
+        Tenetur distinctio necessitatibus pariatur voluptatibus.",
+      },
+      {
+        icon: SpriteSvg+"#icon-trophy",
+        title: "Only the best properties",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
+                Tenetur distinctio necessitatibus pariatur voluptatibus.",
+      },
+      {
+        icon: SpriteSvg+"#icon-map-pin",
+        title: "All homes in in top locations",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
+                Tenetur distinctio necessitatibus pariatur voluptatibus.",
+      },
+      {
+        icon: SpriteSvg+"#icon-key",
+        title: "New home in one week",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
+                Tenetur distinctio necessitatibus pariatur voluptatibus.",
+      },
+      {
+        icon: SpriteSvg+"#icon-presentation",
+        title: "Top 1% realtors",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
+                Tenetur distinctio necessitatibus pariatur voluptatibus.",
+      },
+      {
+        icon: SpriteSvg+"#icon-lock",
+        title: "Secure payments on nexter",
+        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
+                Tenetur distinctio necessitatibus pariatur voluptatibus.",
+      }
+    ]
+  },
+  storyMetaData: {
+    title: "Happy Customers",
+    subtitle: "The best decision of our live",
+    quote: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur distinctio necessitatibus \
+        ariatur voluptatibus. Quidem consequatur harum volupta!",
+    btnText: "Find your own home",
+    img1: StoryImg1,
+    alt1: "Couple with new house",
+    img2: StoryImg2,
+    alt2: "New house"
+  }
+
+};
 export default {
   homes,
-  realtors
+  realtors,
+  metaData
 }

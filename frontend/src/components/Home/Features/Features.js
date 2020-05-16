@@ -1,51 +1,28 @@
 import React, { Component } from 'react';
-import SpriteSvg from "../../../img/sprite.svg";
 import Feature from "./Feature/Feature";
 
-const features = [
-    {
-        icon: SpriteSvg+"#icon-global",
-        title: "World's best luxury homes",
-        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
-            Tenetur distinctio necessitatibus pariatur voluptatibus.",
-    },
-    {
-        icon: SpriteSvg+"#icon-trophy",
-        title: "Only the best properties",
-        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
-            Tenetur distinctio necessitatibus pariatur voluptatibus.",
-    },
-    {
-        icon: SpriteSvg+"#icon-map-pin",
-        title: "All homes in in top locations",
-        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
-            Tenetur distinctio necessitatibus pariatur voluptatibus.",
-    },
-    {
-        icon: SpriteSvg+"#icon-key",
-        title: "New home in one week",
-        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
-            Tenetur distinctio necessitatibus pariatur voluptatibus.",
-    },
-    {
-        icon: SpriteSvg+"#icon-presentation",
-        title: "Top 1% realtors",
-        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
-            Tenetur distinctio necessitatibus pariatur voluptatibus.",
-    },
-    {
-        icon: SpriteSvg+"#icon-lock",
-        title: "Secure payments on nexter",
-        description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\
-            Tenetur distinctio necessitatibus pariatur voluptatibus.",
-    },
-
-];
-
+import { getMetaDataAction } from "../../../actions/metaDataAction";
+import compose from "recompose/compose";
+import {connect} from "react-redux";
+import Loader from "../../Loader/Loader";
+const mapDispatchToProps = dispatch => ({
+    getMetaDataAction: payload => dispatch(getMetaDataAction(payload)),
+});
+const mapStateToProps = (state) => ({...state.metaData});
 class Features extends Component{
+    componentDidMount() {
+        this.props.getMetaDataAction();
+    }
     render(){
+        const { loading, error, metaData } = this.props;
+        if (loading || !metaData) {
+            return <Loader/>;
+        }
+        if (error){
+            return null;
+        }
         const renderListOfFeatures = () => {
-            return features.map (feature =>
+            return metaData.featuresMetaData.features.map (feature =>
                 <Feature
                     key={feature.title}
                     icon={feature.icon}
@@ -60,4 +37,6 @@ class Features extends Component{
         );
     }
 }
-export default Features;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(Features);

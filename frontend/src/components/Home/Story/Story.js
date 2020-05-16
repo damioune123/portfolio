@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
-import StoryImg1 from "../../../img/story-1.jpeg";
-import StoryImg2 from "../../../img/story-2.jpeg";
-
-const meta = {
-    title: "Happy Customers",
-    subtitle: "The best decision of our live",
-    quote: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur distinctio necessitatibus \
-        ariatur voluptatibus. Quidem consequatur harum volupta!",
-    btnText: "Find your own home",
-    img1: StoryImg1,
-    alt1: "Couple with new house",
-    img2: StoryImg2,
-    alt2: "New house"
-};
+import { getMetaDataAction } from "../../../actions/metaDataAction";
+import compose from "recompose/compose";
+import {connect} from "react-redux";
+import Loader from "../../Loader/Loader";
+const mapDispatchToProps = dispatch => ({
+    getMetaDataAction: payload => dispatch(getMetaDataAction(payload)),
+});
+const mapStateToProps = (state) => ({...state.metaData});
 class Story extends Component{
+    componentDidMount() {
+        this.props.getMetaDataAction();
+    }
     render(){
+        const { loading, error, metaData } = this.props;
+        if (loading || !metaData) {
+            return <Loader/>;
+        }
+        if (error){
+            return null;
+        }
         return(
             <React.Fragment>
                 <div className="story__pictures">
-                    <img src={meta.img1} alt={meta.alt1} className="story__img--1"/>
-                    <img src={meta.img2} alt={meta.alt2} className="story__img--2"/>
+                    <img src={metaData.storyMetaData.img1} alt={metaData.storyMetaData.alt1} className="story__img--1"/>
+                    <img src={metaData.storyMetaData.img2} alt={metaData.storyMetaData.alt2} className="story__img--2"/>
                 </div>
                 <div className="story__content">
-                    <h3 className="heading-3 mb-sm">{meta.title}</h3>
-                    <h2 className="heading-2 heading-2--dark mb-md">&ldquo;{meta.subtitle}&rdquo;</h2>
-                    <p className="story__text">{meta.quote}</p>
-                    <button className="btn">{meta.btnText}</button>
+                    <h3 className="heading-3 mb-sm">{metaData.storyMetaData.title}</h3>
+                    <h2 className="heading-2 heading-2--dark mb-md">&ldquo;{metaData.storyMetaData.subtitle}&rdquo;</h2>
+                    <p className="story__text">{metaData.storyMetaData.quote}</p>
+                    <button className="btn">{metaData.storyMetaData.btnText}</button>
                 </div>
             </React.Fragment>
         );
     }
 }
-export default Story;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(Story);
