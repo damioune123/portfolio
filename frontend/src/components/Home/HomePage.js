@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Hero from "./Hero/Hero";
-import Features from "./Features/features";
+import Features from "./Features/Features";
 import Story from "./Story/Story";
 import Homes from "./Homes/Homes";
 import Gallery from "./Gallery/Gallery";

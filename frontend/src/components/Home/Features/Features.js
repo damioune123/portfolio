@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SpriteSvg from "../../../img/sprite.svg";
-import Feature from "./Feature/feature";
+import Feature from "./Feature/Feature";
 
 const features = [
     {
