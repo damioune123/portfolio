@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from "./Header/Header";
 import Realtors from "./Realtors/Realtors";
+import Features from "./Features/features";
 class HomePage extends Component{
     render(){
         return(
@@ -10,6 +11,7 @@ class HomePage extends Component{
                 </div>
                 <Header/>
                 <Realtors />
+                <Features />
             </div>
         );
     }

@@ -29,9 +29,7 @@ class Realtors extends Component{
 
     render(){
         const renderListOfRealtors = () => {
-            return realtors.map (realtor =>{
-                return <Realtor key={realtor.fullName} fullname={realtor.fullName} img={realtor.img} alt={realtor.alt} sold={realtor.sold} />;
-            })
+            return realtors.map (realtor => <Realtor key={realtor.fullName} fullname={realtor.fullName} img={realtor.img} alt={realtor.alt} sold={realtor.sold} /> );
         };
         return(
             <div className="realtors">
