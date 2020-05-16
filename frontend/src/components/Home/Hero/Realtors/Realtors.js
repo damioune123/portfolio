@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
 import Realtor from "./Realtor/Realtor";
+import Loader from "../../../Loader/Loader";
 
-import Realtor1Img from "../../../../img/realtor-1.jpeg";
-import Realtor2Img from "../../../../img/realtor-2.jpeg";
-import Realtor3Img from "../../../../img/realtor-3.jpeg";
+import { getRealtorsAction } from "../../../../actions/realtorActions";
+import compose from "recompose/compose";
+import {connect} from "react-redux";
 
-const realtors = [
-    {
-        img: Realtor1Img,
-        alt: "Realtor 1",
-        fullName: "Erik Feinman",
-        sold: 125
-    },
-    {
-        img: Realtor2Img,
-        alt: "Realtor 2",
-        fullName: "Kim Brown",
-        sold: 284
-    },
-    {
-        img: Realtor3Img,
-        alt: "Realtor 3",
-        fullName: "Toby Ramsey",
-        sold: 254
-    },
+const mapDispatchToProps = dispatch => ({
+    getRealtorsAction: payload => dispatch(getRealtorsAction(payload)),
+});
+const mapStateToProps = (state) => ({...state.realtors});
 
-];
 class Realtors extends Component{
-
+    componentDidMount() {
+        this.props.getRealtorsAction();
+    }
     render(){
+        const { loading, error, realtors } = this.props;
+        if (loading || !realtors) {
+            return <Loader extraClassName="loader--7"/>;
+        }
+        if (error){
+            return null;
+        }
         const renderListOfRealtors = () => {
             realtors.sort((a, b)=>b.sold - a.sold);
             return realtors.map (realtor =>
@@ -48,4 +42,6 @@ class Realtors extends Component{
         );
     }
 }
-export default Realtors;
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps)
+)(Realtors);

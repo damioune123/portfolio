@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import ReactLoaderSpinner from 'react-loader-spinner'
 class Loader extends Component{
     render(){
+        const rootClassName = "loader "+ (this.props.extraClassName ? this.props.extraClassName : "");
         return(
-            <div className="loader">
+            <div className={rootClassName}>
                 <ReactLoaderSpinner
                     className="loader__spinner"
                     type={this.props.type || "Bars"}

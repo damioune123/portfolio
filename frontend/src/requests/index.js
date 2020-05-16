@@ -31,7 +31,14 @@ class AjaxRequests {
             await this.sleep(10000);
             return resolve({data: {homes: mockData.homes }})
         })
-    }
+    };
+
+    getRealtors = ()=> {
+        return new Promise(async (resolve)=> {
+            await this.sleep(10000);
+            return resolve({data: {realtors: mockData.realtors }})
+        })
+    };
 
 }
 const ajaxRequest = new AjaxRequests();

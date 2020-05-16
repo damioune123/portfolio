@@ -1,11 +1,16 @@
-//HOME MOCK DATA
+//HOMES IMG
 import House1Img from "../img/house-1.jpeg";
 import House2Img from "../img/house-2.jpeg";
 import House3Img from "../img/house-3.jpeg";
 import House4Img from "../img/house-4.jpeg";
 import House5Img from "../img/house-5.jpeg";
 import House6Img from "../img/house-6.jpeg";
+//REALTORS IMG
+import Realtor1Img from "../img/realtor-1.jpeg";
+import Realtor2Img from "../img/realtor-2.jpeg";
+import Realtor3Img from "../img/realtor-3.jpeg";
 
+//HOME MOCK DATA
 const homes = [
   {
     img: House1Img,
@@ -63,6 +68,28 @@ const homes = [
   },
 ];
 
+//REALTORS MOCK DATA
+const realtors = [
+  {
+    img: Realtor1Img,
+    alt: "Realtor 1",
+    fullName: "Erik Feinman",
+    sold: 125
+  },
+  {
+    img: Realtor2Img,
+    alt: "Realtor 2",
+    fullName: "Kim Brown",
+    sold: 284
+  },
+  {
+    img: Realtor3Img,
+    alt: "Realtor 3",
+    fullName: "Toby Ramsey",
+    sold: 254
+  },
+];
 export default {
-  homes
+  homes,
+  realtors
 }
