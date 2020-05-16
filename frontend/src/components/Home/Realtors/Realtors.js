@@ -10,26 +10,35 @@ const realtors = [
         img: Realtor1Img,
         alt: "Realtor 1",
         fullName: "Erik Feinman",
-        sold: 245
+        sold: 125
     },
     {
         img: Realtor2Img,
         alt: "Realtor 2",
         fullName: "Kim Brown",
-        sold: 212
+        sold: 284
     },
     {
         img: Realtor3Img,
         alt: "Realtor 3",
         fullName: "Toby Ramsey",
-        sold: 198
-    }
+        sold: 254
+    },
+
 ];
 class Realtors extends Component{
 
     render(){
         const renderListOfRealtors = () => {
-            return realtors.map (realtor => <Realtor key={realtor.fullName} fullname={realtor.fullName} img={realtor.img} alt={realtor.alt} sold={realtor.sold} /> );
+            realtors.sort((a, b)=>b.sold - a.sold);
+            return realtors.map (realtor =>
+                <Realtor
+                    key={realtor.fullName}
+                    fullname={realtor.fullName}
+                    img={realtor.img}
+                    alt={realtor.alt}
+                    sold={realtor.sold}
+                />);
         };
         return(
             <div className="realtors">

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Header from "./Header/Header";
 import Realtors from "./Realtors/Realtors";
 import Features from "./Features/features";
+import Story from "./Story/Story";
+import Homes from "./Homes/Homes";
 class HomePage extends Component{
     render(){
         return(
@@ -12,6 +14,8 @@ class HomePage extends Component{
                 <Header/>
                 <Realtors />
                 <Features />
+                <Story />
+                <Homes />
             </div>
         );
     }

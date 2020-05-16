@@ -45,7 +45,13 @@ const features = [
 class Features extends Component{
     render(){
         const renderListOfFeatures = () => {
-            return features.map (feature =><Feature key={feature.title} icon={feature.icon} title={feature.title} description={feature.description} />);
+            return features.map (feature =>
+                <Feature
+                    key={feature.title}
+                    icon={feature.icon}
+                    title={feature.title}
+                    description={feature.description}
+                />);
         };
         return(
             <section className="features">
