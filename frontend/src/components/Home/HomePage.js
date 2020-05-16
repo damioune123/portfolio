@@ -9,10 +9,10 @@ class HomePage extends Component{
         return(
             <React.Fragment>
                 <Hero />
-                <Features />
-                <Story />
-                <Homes />
-                <Gallery />
+                <Features id="features"/>
+                <Story id="story"/>
+                <Homes id="homes"/>
+                <Gallery id="gallery"/>
             </React.Fragment>
         );
     }
