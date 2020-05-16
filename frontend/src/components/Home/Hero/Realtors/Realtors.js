@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Realtor from "./Realtor/Realtor";
 
-import Realtor1Img from "../../../img/realtor-1.jpeg";
-import Realtor2Img from "../../../img/realtor-2.jpeg";
-import Realtor3Img from "../../../img/realtor-3.jpeg";
+import Realtor1Img from "../../../../img/realtor-1.jpeg";
+import Realtor2Img from "../../../../img/realtor-2.jpeg";
+import Realtor3Img from "../../../../img/realtor-3.jpeg";
 
 const realtors = [
     {
