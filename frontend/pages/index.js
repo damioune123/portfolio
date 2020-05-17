@@ -1,7 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
+import Navbar from "../src/components/Navbar/Navbar";
 import HomePage from "../src/components/Home/HomePage";
+import Footer from "../src/components/Footer/Footer";
+
 import '../src/assets/scss/index.scss';
+
 import {
   getMetaDataAction,
   getHomesAction,
@@ -20,15 +24,16 @@ class Index extends React.Component {
     ]);
   }
   render() {
-    console.log(this.props);
-    return (<HomePage />);
+    return (
+        <div className="container">
+            <Navbar />
+            <HomePage />
+            <Footer />
+        </div>);
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    placeholderData: state.getIn(['next', 'metaData'])
-  }
-}
+const mapStateToProps = (state) => ({...state.metaData});
+
 
 export default connect(mapStateToProps)(Index);

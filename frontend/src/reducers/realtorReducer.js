@@ -7,28 +7,32 @@ import {
 import { initialState } from '../constants/initialState';
 
 export default function contactReducer(
-    state = initialState.get('realtors'),
+    state = initialState()['realtors'],
     action
 ) {
     switch (action.type) {
         case GET_REALTORS:
-            return state.merge({
+            return {
+                ...state,
                 loading: true,
                 homes: null,
                 error: null
-            });
+            };
         case GET_REALTORS_SUCCESS:
-            return state.merge({
+            return {
+                ...state,
                 loading: false,
-                realtors: action.payload.realtors,
-                error: null
-            });
+                realtors: action.payload.realtors
+            };
+
         case GET_REALTORS_FAILURE:
-            return state.merge({
+            return {
+                ...state,
                 loading: false,
                 error: action.payload.error,
                 homes: null
-            });
+            };
+
         default:
             return state;
     }

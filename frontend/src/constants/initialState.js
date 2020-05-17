@@ -1,6 +1,5 @@
-import { fromJS } from 'immutable';
 
-export const initialState = fromJS({
+export const initialState = () =>({
     metaData: {
         metaData: null,
         loading: false,

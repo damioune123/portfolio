@@ -16,16 +16,11 @@ module.exports = {
       }
     );
     config.module.config.push({
-      components: path.resolve(__dirname, './src/components')
+        pages: path.resolve(__dirname, './pages'),
+        components: path.resolve(__dirname, './src/components')
     });
     return config;
   }
 };
 
-module.exports = withSass({
-  cssModules: true,
-  cssLoaderOptions: {
-    importLoaders: 1,
-    localIdentName: '[local]___[hash:base64:5]',
-  }
-});
+module.exports = withSass();

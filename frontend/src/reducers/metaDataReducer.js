@@ -7,28 +7,32 @@ import {
 import { initialState } from '../constants/initialState';
 
 export default function contactReducer(
-    state = initialState.get('metaData'),
+    state = initialState()['metaData'],
     action
 ) {
     switch (action.type) {
         case GET_META_DATA:
-            return state.merge({
+            return {
+                ...state,
                 loading: true,
                 metaData: null,
                 error: null
-            });
+            };
         case GET_META_DATA_SUCCESS:
-            return state.merge({
+            return {
+                ...state,
                 loading: false,
-                metaData: action.payload.metaData,
-                error: null
-            });
+                metaData: action.payload.metaData
+            };
+
         case GET_META_DATA_FAILURE:
-            return state.merge({
+            return {
+                ...state,
                 loading: false,
                 error: action.payload.error,
                 metaData: null
-            });
+            };
+
         default:
             return state;
     }
