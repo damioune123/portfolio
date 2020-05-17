@@ -6,7 +6,7 @@ import {
     getMetaDataFailureAction,
 } from "../actions";
 
-export function* watchGetMetaData() {
+function* watchGetMetaData() {
     yield takeLatest(GET_META_DATA, callGetMetaData);
 }
 

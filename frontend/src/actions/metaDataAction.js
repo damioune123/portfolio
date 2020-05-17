@@ -3,9 +3,7 @@ export const GET_META_DATA_SUCCESS = "GET_META_DATA_SUCCESS";
 export const GET_META_DATA_FAILURE = "GET_META_DATA_FAILURE";
 
 export function getMetaDataAction() {
-    return {
-        type: GET_META_DATA,
-    }
+    return { type: GET_META_DATA }
 }
 export function getMetaDataSuccessAction(metaData) {
     return {

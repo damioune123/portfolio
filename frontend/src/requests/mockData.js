@@ -1,41 +1,41 @@
 //HOMES IMG
-import House1Img from "../assets/img/house-1.jpeg";
-import House2Img from "../assets/img/house-2.jpeg";
-import House3Img from "../assets/img/house-3.jpeg";
-import House4Img from "../assets/img/house-4.jpeg";
-import House5Img from "../assets/img/house-5.jpeg";
-import House6Img from "../assets/img/house-6.jpeg";
+const House1Img = "/static/img/house-1.jpeg";
+const House2Img = "/static/img/house-2.jpeg";
+const House3Img = "/static/img/house-3.jpeg";
+const House4Img = "/static/img/house-4.jpeg";
+const House5Img = "/static/img/house-5.jpeg";
+const House6Img = "/static/img/house-6.jpeg";
 
 //REALTORS IMG
-import Realtor1Img from "../assets/img/realtor-1.jpeg";
-import Realtor2Img from "../assets/img/realtor-2.jpeg";
-import Realtor3Img from "../assets/img/realtor-3.jpeg";
+const Realtor1Img = "/static/img/realtor-1.jpeg";
+const Realtor2Img = "/static/img/realtor-2.jpeg";
+const Realtor3Img = "/static/img/realtor-3.jpeg";
 
 //METADATA IMG
-import LogoImg from "../assets/img/logo.png";
-import SeenOnLogo1 from "../assets/img/logo-bbc.png";
-import SeenOnLogo2 from "../assets/img/logo-forbes.png";
-import SeenOnLogo3 from "../assets/img/logo-techcrunch.png";
-import SeenOnLogo4 from "../assets/img/logo-bi.png";
-import SpriteSvg from "../assets/img/sprite.svg";
-import StoryImg1 from "../assets/img/story-1.jpeg";
-import StoryImg2 from "../assets/img/story-2.jpeg";
+const LogoImg = "/static/img/logo.png";
+const SeenOnLogo1 = "/static/img/logo-bbc.png";
+const SeenOnLogo2 = "/static/img/logo-forbes.png";
+const SeenOnLogo3 = "/static/img/logo-techcrunch.png";
+const SeenOnLogo4 = "/static/img/logo-bi.png";
+const SpriteSvg = "/static/img/sprite.svg";
+const StoryImg1 = "/static/img/story-1.jpeg";
+const StoryImg2 = "/static/img/story-2.jpeg";
 
 //GALLERY ITEMS IMG
-import Item1Img from "../assets/img/gal-1.jpeg";
-import Item2Img from "../assets/img/gal-2.jpeg";
-import Item3Img from "../assets/img/gal-3.jpeg";
-import Item4Img from "../assets/img/gal-4.jpeg";
-import Item5Img from "../assets/img/gal-5.jpeg";
-import Item6Img from "../assets/img/gal-6.jpeg";
-import Item7Img from "../assets/img/gal-7.jpeg";
-import Item8Img from "../assets/img/gal-8.jpeg";
-import Item9Img from "../assets/img/gal-9.jpeg";
-import Item10Img from "../assets/img/gal-10.jpeg";
-import Item11Img from "../assets/img/gal-11.jpeg";
-import Item12Img from "../assets/img/gal-12.jpeg";
-import Item13Img from "../assets/img/gal-13.jpeg";
-import Item14Img from "../assets/img/gal-14.jpeg";
+const Item1Img = "/static/img/gal-1.jpeg";
+const Item2Img = "/static/img/gal-2.jpeg";
+const Item3Img = "/static/img/gal-3.jpeg";
+const Item4Img = "/static/img/gal-4.jpeg";
+const Item5Img = "/static/img/gal-5.jpeg";
+const Item6Img = "/static/img/gal-6.jpeg";
+const Item7Img = "/static/img/gal-7.jpeg";
+const Item8Img = "/static/img/gal-8.jpeg";
+const Item9Img = "/static/img/gal-9.jpeg";
+const Item10Img = "/static/img/gal-10.jpeg";
+const Item11Img = "/static/img/gal-11.jpeg";
+const Item12Img = "/static/img/gal-12.jpeg";
+const Item13Img = "/static/img/gal-13.jpeg";
+const Item14Img = "/static/img/gal-14.jpeg";
 
 //HOME MOCK DATA
 const homes = [

@@ -3,9 +3,7 @@ export const GET_REALTORS_SUCCESS = "GET_REALTORS_SUCCESS";
 export const GET_REALTORS_FAILURE = "GET_REALTORS_FAILURE";
 
 export function getRealtorsAction() {
-    return {
-        type: GET_REALTORS,
-    }
+    return { type: GET_REALTORS }
 }
 export function getRealtorsSuccessAction(realtors) {
     return {

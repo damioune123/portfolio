@@ -6,7 +6,7 @@ import {
     getHomesSuccessAction,
 } from "../actions";
 
-export function* watchGetHomes() {
+function* watchGetHomes() {
     yield takeLatest(GET_HOMES, callGetHomes);
 }
 

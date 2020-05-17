@@ -6,7 +6,7 @@ import {
     getGalleryItemsSuccessAction,
 } from "../actions";
 
-export function* watchGetGalleryItems() {
+function* watchGetGalleryItems() {
     yield takeLatest(GET_GALLERY_ITEMS, callGetGalleryItems);
 }
 

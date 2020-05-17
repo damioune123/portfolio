@@ -6,7 +6,7 @@ import {
     getRealtorsSuccessAction,
 } from "../actions/realtorActions";
 
-export function* watchGetRealtors() {
+function* watchGetRealtors() {
     yield takeLatest(GET_REALTORS, callGetRealtors);
 }
 

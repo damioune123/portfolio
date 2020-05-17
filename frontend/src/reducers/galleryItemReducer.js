@@ -4,39 +4,31 @@ import {
     GET_GALLERY_ITEMS_FAILURE
 } from "../actions";
 
-const initialState = {
-    galleryItems: null,
-    loading: false,
-    error: null
-};
+import { initialState } from '../constants/initialState';
 
 export default function contactReducer(
-    state = initialState,
+    state = initialState.get('galleryItems'),
     action
 ) {
     switch (action.type) {
         case GET_GALLERY_ITEMS:
-            return {
-                ...state,
+            return state.merge({
                 loading: true,
                 galleryItems: null,
                 error: null
-            };
+            });
         case GET_GALLERY_ITEMS_SUCCESS:
-            return {
-                ...state,
+            return state.merge({
                 loading: false,
-                galleryItems: action.payload.galleryItems
-            };
-
+                galleryItems: action.payload.galleryItems,
+                error: null
+            });
         case GET_GALLERY_ITEMS_FAILURE:
-            return {
-                ...state,
+            return state.merge({
                 loading: false,
                 error: action.payload.error,
                 galleryItems: null
-            };
-
+            });
         default:
             return state;
     }

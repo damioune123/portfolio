@@ -3,9 +3,7 @@ export const GET_GALLERY_ITEMS_SUCCESS = "GET_GALLERY_ITEMS_SUCCESS";
 export const GET_GALLERY_ITEMS_FAILURE = "GET_GALLERY_ITEMS_FAILURE";
 
 export function getGalleryItemsAction() {
-    return {
-        type: GET_GALLERY_ITEMS,
-    }
+    return { type: GET_GALLERY_ITEMS }
 }
 export function getGalleryItemsSuccessAction(galleryItems) {
     return {
