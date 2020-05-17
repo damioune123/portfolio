@@ -1,5 +1,12 @@
-@import 'global';
+@import "base";
+@import "typography";
 
-@import 'pages/PageDefault/styles';
-
-@import 'pages/PageOther/styles';
+@import "loader";
+@import "sidebar";
+@import "header";
+@import "realtors";
+@import "features";
+@import "story";
+@import "homes";
+@import "gallery";
+@import "footer";

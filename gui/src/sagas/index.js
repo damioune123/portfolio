@@ -1,9 +1,14 @@
-import { all } from 'redux-saga/effects';
-
-import reposSaga from './ReposSaga';
+import { all} from 'redux-saga/effects';
+import homeSaga from './homeSaga';
+import realtorSaga from './realtorSaga';
+import metaDataSaga from './metaDataSaga';
+import galleryItemSaga from './galleryItemSaga';
 
 export default function* rootSaga() {
   yield all([
-    reposSaga(),
+    homeSaga(),
+    realtorSaga(),
+    metaDataSaga(),
+    galleryItemSaga(),
   ]);
 }

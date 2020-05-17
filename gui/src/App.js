@@ -4,12 +4,16 @@ import { Provider } from 'react-redux';
 
 import { configureStore } from './store/configureStore';
 import AppRoutes from './routes';
+import Navbar from "./components/Navbar/Navbar";
 
 const App =
   <Provider store={configureStore()}>
-    <Router>
-      <AppRoutes />
-    </Router>
+      <div className="container">
+          <Navbar/>
+          <Router>
+            <AppRoutes />
+          </Router>
+      </div>
   </Provider>;
 
 export default App;

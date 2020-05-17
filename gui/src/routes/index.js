@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Route,
@@ -6,14 +5,14 @@ import {
 } from 'react-router-dom';
 
 import {
-  AsyncPageDefault,
+  AsyncPageHome,
   AsyncPageOther
 } from './AsyncComponents';
 
 const AppRoutes = () =>
     <Switch>
-      <Route exact path='/' component={AsyncPageDefault} />
+      <Route exact path='/' component={AsyncPageHome} />
       <Route path='/other' component={AsyncPageOther} />
-    </Switch>
+    </Switch>;
 
 export default AppRoutes;

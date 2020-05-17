@@ -8,7 +8,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <Link to='/'>Page default</Link>
+        <Link to='/'>Page Home</Link>
         <Link to='/other'>Page other</Link>
       </header>
     </div>

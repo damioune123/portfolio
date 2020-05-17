@@ -20,9 +20,4 @@ export const configureStore = () => {
   runSaga();
 
   return store;
-}
-
-
-// export const storeDispatch = action => store.dispatch(action);
-
-// export default store;
+};

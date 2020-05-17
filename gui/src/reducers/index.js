@@ -1,16 +1,12 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
+import homes from "./homeReducer";
+import realtors from "./realtorReducer";
+import metaData from "./metaDataReducer";
+import galleryItems from "./galleryItemReducer";
 
-import Repos from './ReposReducer';
-
-const appReducer = combineReducers({
-  Repos
+export default combineReducers({
+    homes,
+    realtors,
+    metaData,
+    galleryItems
 });
-
-const rootReducer = (state, action) => {
-  if (action.type === 'USER_LOGOUT') {
-    state = undefined
-  }
-  return appReducer(state, action);
-}
-
-export default rootReducer;

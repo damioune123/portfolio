@@ -1,10 +1,10 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
-export const AsyncPageDefault = Loadable({
-  loader: () => import(/* webpackChunkName: "PageDefault" */ '../pages/PageDefault'),
+export const AsyncPageHome = Loadable({
+  loader: () => import(/* webpackChunkName: "PageDefault" */ '../pages/PageHome'),
   loading: () => <div>loading...</div>,
-  modules: ['PageDefault'],
+  modules: ['PageHome'],
 });
 
 
