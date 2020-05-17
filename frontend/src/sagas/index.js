@@ -1,14 +1,14 @@
-import { all, fork } from 'redux-saga/effects';
-import hello from './hello';
-import clock from './clock';
-import next from './next';
+import { all} from 'redux-saga/effects';
+import homeSaga from './homeSaga';
+import realtorSaga from './realtorSaga';
+import metaDataSaga from './metaDataSaga';
+import galleryItemSaga from './galleryItemSaga';
 
-function* rootSaga() {
+export default function* rootSaga() {
   yield all([
-    fork(hello),
-    fork(clock),
-    fork(next)
-  ])
+    homeSaga(),
+    realtorSaga(),
+    metaDataSaga(),
+    galleryItemSaga(),
+  ]);
 }
-
-export default rootSaga;

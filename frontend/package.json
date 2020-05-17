@@ -11,9 +11,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.0.0-beta.51",
     "@zeit/next-sass": "^0.2.0",
-    "axios": "^0.18.0",
+    "axios": "^0.19.2",
     "babel-plugin-module-resolver": "^3.1.1",
     "express": "^4.16.3",
     "immutable": "^3.8.2",
@@ -24,7 +25,9 @@
     "node-sass": "^4.9.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-loader-spinner": "^3.1.14",
     "react-redux": "^5.0.7",
+    "recompose": "^0.30.0",
     "redux": "^4.0.0",
     "redux-immutable": "^4.0.0",
     "redux-logger": "^3.0.6",

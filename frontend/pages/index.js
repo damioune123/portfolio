@@ -1,44 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import { loadData } from 'actions/nextActions';
-import Count from 'components/Count';
-import styles from 'styles/pages/index.scss';
+import HomePage from "../src/components/Home/HomePage";
+import '../src/assets/scss/index.scss';
+import {
+  getMetaDataAction,
+  getHomesAction,
+  getGalleryItemsAction,
+  getRealtorsAction
+} from '../src/actions';
 
 class Index extends React.Component {
   static async getInitialProps(props) {
     const { store } = props.ctx;
-
-    if (!store.getState().placeholderData) {
-      store.dispatch(loadData());
-    }
+    store.dispatch(getMetaDataAction());
+    store.dispatch(getHomesAction());
+    store.dispatch(getRealtorsAction());
+    store.dispatch(getGalleryItemsAction());
   }
-
   render() {
-    const { placeholderData } = this.props;
-
-    return (
-      <div>
-        <Count />
-
-        <div className={styles.next_container}>
-          <h1 className={styles.title}>Hey hey</h1>
-          <a href={placeholderData.get('html_url')} target="_blank">
-            <h3>Next's github</h3>
-          </a>
-          <img src={placeholderData.get('owner').get('avatar_url')} style={{ width: '60px' }} />
-          <p>componay: {placeholderData.get('organization').get('login')}</p>
-          <p>{placeholderData.get('description')}</p>
-          <p>Next.js has <mark>{placeholderData.get('stargazers_count')}</mark> ⭐️</p>
-        </div>
-      </div>
-    )
+    console.log(this.props);
+    return (<HomePage />);
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    placeholderData: state.getIn(['next', 'placeholderData'])
+    placeholderData: state.getIn(['next', 'metaData'])
   }
 }
 

@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import App, { Container } from 'next/app';
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
-import { initStore } from 'store/createStore';
-import Layout from 'components/Layout';
+import { initStore } from '../src/store/createStore';
 import { fromJS } from 'immutable';
+import Navbar from "../src/components/Navbar/Navbar";
 
 class MyApp extends App {
   static async getInitialProps ({ Component, ctx }) {
@@ -22,9 +22,10 @@ class MyApp extends App {
     const { Component, pageProps, store } = this.props
     return <Container>
       <Provider store={store}>
-        <Layout>
+        <div className="container">
+          <Navbar/>
           <Component {...pageProps} />
-        </Layout>
+        </div>
       </Provider>
     </Container>
   }

@@ -1,6 +1,13 @@
 {
   "presets": [
-    "@babel/preset-env",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "esmodules": true
+        }
+      }
+    ],
     "next/babel"
   ],
   "plugins": [
@@ -11,6 +18,8 @@
           "./src"
         ]
       }
-    ]
+    ],
+    "@babel/plugin-proposal-class-properties"
   ]
+
 }
