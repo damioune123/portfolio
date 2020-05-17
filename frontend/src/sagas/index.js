@@ -1,14 +1,14 @@
-import { all, call } from 'redux-saga/effects';
-import { watchGetHomes } from './homeSaga';
-import { watchGetRealtors } from './realtorSaga';
-import { watchGetMetaData } from './metaDataSaga';
-import { watchGetGalleryItems } from './galleryItemSaga';
+import { all, fork } from 'redux-saga/effects';
+import hello from './hello';
+import clock from './clock';
+import next from './next';
 
-export default function* rootSaga() {
-    yield all([
-        call(watchGetHomes),
-        call(watchGetRealtors),
-        call(watchGetMetaData),
-        call(watchGetGalleryItems),
-    ]);
+function* rootSaga() {
+  yield all([
+    fork(hello),
+    fork(clock),
+    fork(next)
+  ])
 }
+
+export default rootSaga;

@@ -1,22 +1,18 @@
-import express from 'express';
-import Loadable from 'react-loadable';
 
-import indexController from './controllers/index';
+const { createServer } = require('http')
+const next = require('next')
+const routes = require('./routes')
 
-const PORT = process.env.PORT || 5000;
+const port = parseInt(process.env.PORT, 10) || 3000
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handler = routes.getRequestHandler(app)
 
-// initialize the application and create the routes
-const app = express();
-
-app.use(indexController);
-
-// start the app
-Loadable.preloadAll().then(() => {
-    app.listen(PORT, (error) => {
-        if (error) {
-            return console.log('something bad happened', error);
-        }
-
-        console.log("listening on " + PORT + "...");
-    });
-});
+app.prepare()
+    .then(() => {
+        createServer(handler)
+            .listen(port, (err) => {
+                if (err) throw err
+                console.log(`> Ready on http://localhost:${port}`)
+            })
+    })

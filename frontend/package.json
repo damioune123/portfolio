@@ -1,56 +1,39 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.9.10",
-    "@material-ui/lab": "^4.0.0-alpha.49",
-    "axios": "^0.19.2",
-    "bootstrap": "^4.4.1",
-    "final-form": "^4.19.1",
-    "final-form-material-ui": "^0.3.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-final-form": "^6.4.0",
-    "react-loader-spinner": "^3.1.14",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
-    "react-router-hash-link": "^1.2.2",
-    "react-scripts": "3.4.1",
-    "recompose": "^0.30.0",
-    "redux-saga": "^1.1.3"
-  },
+  "name": "nextjs-react-redux-filter",
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "repository": "https://github.com/yrfang/nextjs-react-redux-filter.git",
+  "author": "Ying Ru <fyr1116@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "start": "sh  -ac 'cp .env.${REACT_APP_ENV} .env; react-scripts start'",
-    "start:dev": "npm run start:dev:staging-api",
-    "start:dev:staging-api": "REACT_APP_ENV=staging npm run start",
-    "start:dev:production-api": "REACT_APP_ENV=production npm run start",
-    "build": "sh  -ac 'cp .env.${REACT_APP_ENV} .env; react-scripts build'",
-    "build:production": "REACT_APP_ENV=production npm run build",
-    "build:staging": "REACT_APP_ENV=staging npm run build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js "
+    "dev": "nodemon server/index.js",
+    "build": "next build",
+    "start": "next start"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "@zeit/next-sass": "^0.2.0",
+    "axios": "^0.18.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "express": "^4.16.3",
+    "immutable": "^3.8.2",
+    "next": "^6.0.3",
+    "next-redux-saga": "^3.0.0-beta.1",
+    "next-redux-wrapper": "^2.0.0-beta.6",
+    "next-routes": "^1.4.2",
+    "node-sass": "^4.9.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-immutable": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^0.16.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-react": "^7.19.0",
-    "node-sass": "^4.14.1"
+    "autoprefixer": "^8.6.4",
+    "nodemon": "^1.17.5",
+    "postcss-easy-import": "^3.0.0"
   }
 }

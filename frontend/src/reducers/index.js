@@ -1,12 +1,14 @@
-import { combineReducers } from "redux";
-import homes from "./homeReducer";
-import realtors from "./realtorReducer";
-import metaData from "./metaDataReducer";
-import galleryItems from "./galleryItemReducer";
+import { combineReducers } from 'redux-immutable';
+import countReducers from './countReducers';
+import textReducers from './textReducers';
+import clockReducers from './clockReducers';
+import nextReducers from './nextReducers';
 
-export default combineReducers({
-    homes,
-    realtors,
-    metaData,
-    galleryItems
+const rootReducer = combineReducers({
+  count: countReducers,
+  text: textReducers,
+  clock: clockReducers,
+  next: nextReducers
 });
+
+export default rootReducer;
