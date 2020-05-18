@@ -6,15 +6,15 @@
   "author": "Ying Ru <fyr1116@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "dotenv -e .env.${REACT_APP_ENV} nodemon server/index.js",
+    "dev": "sh  -ac 'cp .env.${REACT_APP_ENV} .env;  nodemon server/index.js'",
     "dev:staging": "REACT_APP_ENV=staging npm run dev",
     "dev:prod": "REACT_APP_ENV=prod npm run dev",
     "dev:local": "REACT_APP_ENV=local npm run dev",
-    "build": "dotenv -e .env.${REACT_APP_ENV} next build",
+    "build": "sh  -ac 'cp .env.${REACT_APP_ENV} .env;  next build'",
     "build:staging": "REACT_APP_ENV=staging npm run build",
     "build:prod": "REACT_APP_ENV=prod npm run build",
     "build:local": "REACT_APP_ENV=local npm run build",
-    "start": "dotenv -e .env.${REACT_APP_ENV} node server/index.js",
+    "start": "sh  -ac 'cp .env.${REACT_APP_ENV} .env;  node server/index.js'",
     "start:staging": "REACT_APP_ENV=staging npm run start",
     "start:prod": "REACT_APP_ENV=prod npm run start",
     "start:local": "REACT_APP_ENV=local npm run start"
@@ -26,6 +26,8 @@
     "@zeit/next-sass": "^0.2.0",
     "axios": "^0.19.2",
     "babel-plugin-module-resolver": "^3.1.1",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^1.8.0",
     "express": "^4.16.3",
     "immutable": "^3.8.2",
     "next": "^6.0.3",
@@ -41,8 +43,7 @@
     "redux": "^4.0.0",
     "redux-immutable": "^4.0.0",
     "redux-logger": "^3.0.6",
-    "redux-saga": "^0.16.0",
-    "redux-thunk": "^2.3.0"
+    "redux-saga": "^0.16.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.4",
