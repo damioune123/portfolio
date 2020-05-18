@@ -27,7 +27,7 @@ services:
   express_prod:
     build:
       context: ./frontend
-      dockerfile: ./frontend/docker/production/Dockerfile
+      dockerfile: ./docker/production/Dockerfile
     networks:
       - web
     depends_on:
@@ -39,7 +39,7 @@ services:
   express_staging:
     build:
       context: ./frontend
-      dockerfile: ./frontend/docker/staging/Dockerfile
+      dockerfile: ./docker/staging/Dockerfile
     networks:
       - web
     depends_on:
@@ -52,7 +52,7 @@ services:
     container_name: ${CONTAINER_WP_NAME_PROD}
     build:
       context: ./wordpress
-      dockerfile: ./wordpress/Dockerfile
+      dockerfile: ./Dockerfile
     restart: unless-stopped
     volumes:
       - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
@@ -75,7 +75,7 @@ services:
     container_name: ${CONTAINER_WP_NAME_STAGING}
     build:
       context: ./wordpress
-      dockerfile: ./wordpress/Dockerfile
+      dockerfile: ./Dockerfile
     restart: unless-stopped
     volumes:
       - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
