@@ -26,21 +26,17 @@
       - whoami.damienmeur.com
       - traefik.damienmeur.com
 4. Generate a cert.json empty file for CA 
- `cd backend/traefiek && touch letsencrypt/acme.json && chmod 0600 letsencrypt/acme.json`
+ `cd traefiek && touch letsencrypt/acme.json && chmod 0600 letsencrypt/acme.json`
 5. Generate secrets for the OVH DNS challenge : https://buzut.net/certbot-challenge-dns-ovh-wildcard/ (keep the generated secrets)
-6. Copy ".env.sample: in each directory into ".env", do no forget to replace the OVH secrets in backend/traefik/.env
+6. Copy ".env.sample:  into ".env", do no forget to replace the OVH secrets in  the .env
 7. Create the db_network and web docker networks :
  `sudo docker network create db_network  && sudo docker network create web`
-8. Launch the traefik container
- `cd traefik && sudo docker-compose up -d`
-9. Create the database container
- `cd database && sudo docker-compose up -d`
-10. Grant all access to the mysql root admin
+8. Grant all access to the mysql root admin
 ` sudo docker ps`
 ` sudo docker exec -ti containerId sh`
 ` mysql -u root -p`
 ` GRANT ALL PRIVILEGES ON `%`.* TO 'admin'@'%' IDENTIFIED BY 'your_password' WITH GRANT OPTION;`
 ` flush PRIVILEGES;`
 ` exit`
-11. Launch whoami, wordpress and wordpress staging containers
-`sudo docker-compose up -d in each of their respective directory (where a docker-compose.yml file is present)`
+9. Launch whoami, wordpress and wordpress staging containers
+`sudo docker-compose up -d
