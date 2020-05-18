@@ -30,6 +30,8 @@ services:
       dockerfile: ./frontend/docker/production/Dockerfile
     networks:
       - web
+    depends_on:
+      - wordpress_prod
     labels:
       - "traefik.http.routers.staging_frontend.rule=Host(`${DOMAIN_EXPRESS_PROD}`)"
       - "traefik.http.routers.staging_frontend.entrypoints=secure"
@@ -40,6 +42,8 @@ services:
       dockerfile: ./frontend/docker/staging/Dockerfile
     networks:
       - web
+    depends_on:
+      - wordpress_staging
     labels:
       - "traefik.http.routers.production_frontend.rule=Host(`${DOMAIN_EXPRESS_STAGING}`)"
       - "traefik.http.routers.production_frontend.entrypoints=secure"
@@ -59,6 +63,8 @@ services:
     networks:
       - web
       - db_network
+    depends_on:
+      - mariadb
     environment:
       WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME_PROD}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE_PROD}
@@ -80,6 +86,8 @@ services:
     networks:
       - web
       - db_network
+    depends_on:
+      - mariadb
     environment:
       WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME_STAGING}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE_STAGING}
