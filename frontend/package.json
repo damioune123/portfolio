@@ -6,9 +6,18 @@
   "author": "Ying Ru <fyr1116@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon server/index.js",
-    "build": "next build",
-    "start": "next start"
+    "dev": "dotenv -e .env.${REACT_APP_ENV} nodemon server/index.js",
+    "dev:staging": "REACT_APP_ENV=staging npm run dev",
+    "dev:prod": "REACT_APP_ENV=prod npm run dev",
+    "dev:local": "REACT_APP_ENV=local npm run dev",
+    "build": "dotenv -e .env.${REACT_APP_ENV} next build",
+    "build:staging": "REACT_APP_ENV=staging npm run build",
+    "build:prod": "REACT_APP_ENV=prod npm run build",
+    "build:local": "REACT_APP_ENV=local npm run build",
+    "start": "dotenv -e .env.${REACT_APP_ENV} node server/index.js",
+    "start:staging": "REACT_APP_ENV=staging npm run start",
+    "start:prod": "REACT_APP_ENV=prod npm run start",
+    "start:local": "REACT_APP_ENV=local npm run start"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",

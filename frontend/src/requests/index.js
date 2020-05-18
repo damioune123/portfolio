@@ -8,6 +8,7 @@ class AjaxRequests {
     axiosRequest = null;
 
     init = () => {
+        console.log('app', process.env.NEXT_PUBLIC_API_URL);
         this.axiosRequest = axios.create({
             baseURL: process.env.REACT_APP_API_URL
         });
