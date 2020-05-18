@@ -3,7 +3,7 @@
  -  A Traefik reverse proxy (handling ssl certificates renewals with a ovh dns challenge)
  -  A mariadb (mysql) 
  -  An adminer server (similar to php my admin): adminer.damienmeur.com
- -  Two wordpress (staging and production):  staging.wordpress.damienmeur.com, wordpress.damienmeur.com
+ -  Two directus (staging and production):  staging.directus.damienmeur.com, directus.damienmeur.com
  -  A traefik dashboard : traefik.damienmeur.com
  -  A whoami service : whoami.damienmeur.com
  -  A nodejs service returning the react app static files : damienmeur.com
@@ -20,8 +20,8 @@
 2. Install docker and docker-compose 
 `sudo apt-get install docker docker-compose `
 3. Configure redirection of sub-domains in ovh panel to damienmeur.com for :
-      - staging.wordpress.damienmeur.com
-      - wordpress.damienmeur.com
+      - staging.directus.damienmeur.com
+      - directus.damienmeur.com
       - adminer.damienmeur.com
       - whoami.damienmeur.com
       - traefik.damienmeur.com
@@ -38,5 +38,5 @@
 ` GRANT ALL PRIVILEGES ON `%`.* TO 'admin'@'%' IDENTIFIED BY 'your_password' WITH GRANT OPTION;`
 ` flush PRIVILEGES;`
 ` exit`
-9. Launch whoami, wordpress and wordpress staging containers
+9. Launch whoami, directus and directus staging containers
 `sudo docker-compose up -d

@@ -31,7 +31,7 @@ services:
     networks:
       - web
     depends_on:
-      - wordpress_prod
+      - directus_prod
     labels:
       - "traefik.http.routers.staging_frontend.rule=Host(`${DOMAIN_EXPRESS_PROD}`)"
       - "traefik.http.routers.staging_frontend.entrypoints=secure"
@@ -43,57 +43,59 @@ services:
     networks:
       - web
     depends_on:
-      - wordpress_staging
+      - directus_staging
     labels:
       - "traefik.http.routers.production_frontend.rule=Host(`${DOMAIN_EXPRESS_STAGING}`)"
       - "traefik.http.routers.production_frontend.entrypoints=secure"
       - "traefik.http.routers.production_frontend.tls.certresolver=letsencrypt"
-  wordpress_prod:
-    container_name: ${CONTAINER_WP_NAME_PROD}
-    build:
-      context: ./wordpress
-      dockerfile: ./Dockerfile
-    restart: unless-stopped
+  directus_prod:
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    image: directus:v8.6-apache
+    container_name:  ${CONTAINER_DIRECTUS_NAME_PROD}
+    restart: always
     volumes:
-      - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
-    labels:
-      - "traefik.http.routers.${CONTAINER_WP_NAME_PROD}.rule=Host(`${DOMAIN_WORDPRESS_PROD}`)"
-      - "traefik.http.routers.${CONTAINER_WP_NAME_PROD}.entrypoints=secure"
-      - "traefik.http.routers.${CONTAINER_WP_NAME_PROD}.tls.certresolver=letsencrypt"
+      - ./directus/prod/storage:/var/www/html/storage
     networks:
       - web
       - db_network
-    depends_on:
-      - mariadb
-    environment:
-      WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME_PROD}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE_PROD}
-      WORDPRESS_DB_USER: ${MYSQL_USER_PROD}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD_PROD}
-      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX_PROD}
-  wordpress_staging:
-    container_name: ${CONTAINER_WP_NAME_STAGING}
-    build:
-      context: ./wordpress
-      dockerfile: ./Dockerfile
-    restart: unless-stopped
-    volumes:
-      - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
     labels:
-      - "traefik.http.routers.${CONTAINER_WP_NAME_STAGING}.rule=Host(`${DOMAIN_WORDPRESS_STAGING}`)"
-      - "traefik.http.routers.${CONTAINER_WP_NAME_STAGING}.entrypoints=secure"
-      - "traefik.http.routers.${CONTAINER_WP_NAME_STAGING}.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_PROD}.rule=Host(`${DOMAIN_DIRECTUS_PROD}`)"
+      - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_PROD}.entrypoints=secure"
+      - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_PROD}.tls.certresolver=letsencrypt"
+    environment:
+      - MYSQL_USER=${MYSQL_USER_PROD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD_PROD}
+      - MYSQL_ENV_MYSQL_DATABASE=${MYSQL_DATABASE_PROD}
+      - MYSQL_PORT_3306_TCP_ADDR=${CONTAINER_DB_NAME_PROD}
+      - MYSQL_PORT_3306_TCP_PORT=3306
+      - MYSQL_ENV_MYSQL_PASSWORD=${MYSQL_PASSWORD_PROD}
+      - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_PROD}
+  directus_staging:
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    image: directus:v8.6-apache
+    container_name:  ${CONTAINER_DIRECTUS_NAME_STAGING}
+    restart: always
+    volumes:
+      - ./directus/staging/storage:/var/www/html/storage
     networks:
       - web
       - db_network
-    depends_on:
-      - mariadb
+    labels:
+      - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_STAGING}.rule=Host(`${DOMAIN_DIRECTUS_STAGING}`)"
+      - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_STAGING}.entrypoints=secure"
+      - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_STAGING}.tls.certresolver=letsencrypt"
     environment:
-      WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME_STAGING}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE_STAGING}
-      WORDPRESS_DB_USER: ${MYSQL_USER_STAGING}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD_STAGING}
-      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX_STAGING}
+      - MYSQL_USER=${MYSQL_USER_STAGING}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD_STAGING}
+      - MYSQL_ENV_MYSQL_DATABASE=${MYSQL_DATABASE_STAGING}
+      - MYSQL_PORT_3306_TCP_ADDR=${CONTAINER_DB_NAME_STAGING}
+      - MYSQL_PORT_3306_TCP_PORT=3306
+      - MYSQL_ENV_MYSQL_PASSWORD=${MYSQL_PASSWORD_STAGING}
+      - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_STAGING}
   mariadb:
     container_name: ${CONTAINER_DB_NAME_MARIADB}
     image: mariadb:latest
