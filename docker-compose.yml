@@ -52,7 +52,7 @@ services:
     container_name: ${CONTAINER_WP_NAME_PROD}
     build:
       context: ./wordpress
-      dockerfile: ./wordpress/production/Dockerfile
+      dockerfile: ./wordpress/Dockerfile
     restart: unless-stopped
     volumes:
       - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
@@ -75,7 +75,7 @@ services:
     container_name: ${CONTAINER_WP_NAME_STAGING}
     build:
       context: ./wordpress
-      dockerfile: ./wordpress/staging/Dockerfile
+      dockerfile: ./wordpress/Dockerfile
     restart: unless-stopped
     volumes:
       - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"

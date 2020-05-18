@@ -26,7 +26,7 @@
       - whoami.damienmeur.com
       - traefik.damienmeur.com
 4. Generate a cert.json empty file for CA 
- `cd traefiek && touch letsencrypt/acme.json && chmod 0600 letsencrypt/acme.json`
+ `cd traefik && touch letsencrypt/acme.json && chmod 0600 letsencrypt/acme.json`
 5. Generate secrets for the OVH DNS challenge : https://buzut.net/certbot-challenge-dns-ovh-wildcard/ (keep the generated secrets)
 6. Copy ".env.sample:  into ".env", do no forget to replace the OVH secrets in  the .env
 7. Create the db_network and web docker networks :
