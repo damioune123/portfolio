@@ -1,0 +1,132 @@
+version: '3'
+services:
+  traefik:
+    image: "traefik:v2.2"
+    container_name: "traefik"
+    ports:
+      - "80:80"
+      - "443:443"
+    labels:
+      # Docker labels for enabling Traefik dashboard
+      - "traefik.http.routers.traefik.rule=Host(`${DOMAIN_TRAEFIK}`)"
+      - "traefik.http.routers.traefik.entrypoints=secure"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+    environment:
+      - "OVH_ENDPOINT=${OVH_ENDPOINT}"
+      - "OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}"
+      - "OVH_APPLICATION_SECRET=${OVH_APPLICATION_SECRET}"
+      - "OVH_CONSUMER_KEY=${OVH_CONSUMER_KEY}"
+    networks:
+      - web
+    volumes:
+      - "./traefik/traefik.toml:/traefik.toml"
+      - "./traefik/letsencrypt:/letsencrypt/"
+      - "./traefik/dynamic:/dynamic/"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  express_prod:
+    build:
+      context: ./frontend
+      dockerfile: ./frontend/docker/production/Dockerfile
+    networks:
+      - web
+    labels:
+      - "traefik.http.routers.staging_frontend.rule=Host(`${DOMAIN_EXPRESS_PROD}`)"
+      - "traefik.http.routers.staging_frontend.entrypoints=secure"
+      - "traefik.http.routers.staging_frontend.tls.certresolver=letsencrypt"
+  express_staging:
+    build:
+      context: ./frontend
+      dockerfile: ./frontend/docker/staging/Dockerfile
+    networks:
+      - web
+    labels:
+      - "traefik.http.routers.production_frontend.rule=Host(`${DOMAIN_EXPRESS_STAGING}`)"
+      - "traefik.http.routers.production_frontend.entrypoints=secure"
+      - "traefik.http.routers.production_frontend.tls.certresolver=letsencrypt"
+  wordpress_prod:
+    container_name: ${CONTAINER_WP_NAME_PROD}
+    build:
+      context: ./wordpress
+      dockerfile: ./wordpress/production/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
+    labels:
+      - "traefik.http.routers.${CONTAINER_WP_NAME_PROD}.rule=Host(`${DOMAIN_WORDPRESS_PROD}`)"
+      - "traefik.http.routers.${CONTAINER_WP_NAME_PROD}.entrypoints=secure"
+      - "traefik.http.routers.${CONTAINER_WP_NAME_PROD}.tls.certresolver=letsencrypt"
+    networks:
+      - web
+      - db_network
+    environment:
+      WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME_PROD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE_PROD}
+      WORDPRESS_DB_USER: ${MYSQL_USER_PROD}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD_PROD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX_PROD}
+  wordpress_staging:
+    container_name: ${CONTAINER_WP_NAME_STAGING}
+    build:
+      context: ./wordpress
+      dockerfile: ./wordpress/staging/Dockerfile
+    restart: unless-stopped
+    volumes:
+      - "./wordpress/wp-permission-init.sh:/usr/local/bin/apache2-custom.sh"
+    labels:
+      - "traefik.http.routers.${CONTAINER_WP_NAME_STAGING}.rule=Host(`${DOMAIN_WORDPRESS_STAGING}`)"
+      - "traefik.http.routers.${CONTAINER_WP_NAME_STAGING}.entrypoints=secure"
+      - "traefik.http.routers.${CONTAINER_WP_NAME_STAGING}.tls.certresolver=letsencrypt"
+    networks:
+      - web
+      - db_network
+    environment:
+      WORDPRESS_DB_HOST: ${CONTAINER_DB_NAME_STAGING}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE_STAGING}
+      WORDPRESS_DB_USER: ${MYSQL_USER_STAGING}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD_STAGING}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX_STAGING}
+  mariadb:
+    container_name: ${CONTAINER_DB_NAME_MARIADB}
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+    networks:
+      - db_network
+    labels:
+      - "traefik.enable=false"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD_MARIADB}
+      MYSQL_DATABASE: ${MYSQL_DATABASE_MARIADB}
+      MYSQL_USER: ${MYSQL_USER_MARIADB}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_MARIADB}
+  adminer:
+    image: adminer:4.6.3-standalone
+    labels:
+      - "traefik.http.routers.adminer.rule=Host(`${DOMAIN_ADMINER}`)"
+      - "traefik.http.routers.adminer.entrypoints=secure"
+      - "traefik.http.routers.adminer.tls.certresolver=letsencrypt"
+    networks:
+      - db_network
+      - web
+    depends_on:
+      - mariadb
+  whoami:
+    image: "containous/whoami"
+    container_name: "simple-service"
+    networks:
+      - web
+    labels:
+      - "traefik.http.routers.whoami.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.whoami.entrypoints=secure"
+      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
+
+volumes:
+  db:
+
+networks:
+  web:
+    external: true
+  db_network:
+    external: true
