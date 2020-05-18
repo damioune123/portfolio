@@ -49,9 +49,6 @@ services:
       - "traefik.http.routers.production_frontend.entrypoints=secure"
       - "traefik.http.routers.production_frontend.tls.certresolver=letsencrypt"
   directus_prod:
-    depends_on:
-      mariadb:
-        condition: service_healthy
     image: directus:v8.6-apache
     container_name:  ${CONTAINER_DIRECTUS_NAME_PROD}
     restart: always
@@ -72,10 +69,9 @@ services:
       - MYSQL_PORT_3306_TCP_PORT=3306
       - MYSQL_ENV_MYSQL_PASSWORD=${MYSQL_PASSWORD_PROD}
       - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_PROD}
-  directus_staging:
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - mariadb
+  directus_staging:
     image: directus:v8.6-apache
     container_name:  ${CONTAINER_DIRECTUS_NAME_STAGING}
     restart: always
@@ -96,6 +92,8 @@ services:
       - MYSQL_PORT_3306_TCP_PORT=3306
       - MYSQL_ENV_MYSQL_PASSWORD=${MYSQL_PASSWORD_STAGING}
       - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_STAGING}
+    depends_on:
+      - mariadb
   mariadb:
     container_name: ${CONTAINER_DB_NAME_MARIADB}
     image: mariadb:latest
