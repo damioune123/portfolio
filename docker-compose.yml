@@ -49,11 +49,11 @@ services:
       - "traefik.http.routers.production_frontend.entrypoints=secure"
       - "traefik.http.routers.production_frontend.tls.certresolver=letsencrypt"
   directus_prod:
-    image: directus/directus:v8-apache
-    container_name:  ${CONTAINER_DIRECTUS_NAME_PROD}
+    build:
+      context: ./directus
+      dockerfile: Dockerfile
     restart: always
     volumes:
-      - ./directus/prod/config:/var/directus/config
       - ./directus/prod/storage:/var/directus/public/uploads
     networks:
       - web
@@ -73,11 +73,12 @@ services:
     depends_on:
       - mariadb
   directus_staging:
-    image: directus/directus:v8-apache
+    build:
+      context: ./directus
+      dockerfile: Dockerfile
     container_name:  ${CONTAINER_DIRECTUS_NAME_STAGING}
     restart: always
     volumes:
-      - ./directus/staging/config:/var/directus/config
       - ./directus/staging/storage:/var/directus/public/uploads
     networks:
       - web
