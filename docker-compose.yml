@@ -53,8 +53,8 @@ services:
     container_name:  ${CONTAINER_DIRECTUS_NAME_PROD}
     restart: always
     volumes:
-      - ./directus/prod/storage/config:/var/directus/config
-      - ./directus/prod/storage/uploads:/var/directus/public/uploads
+      - ./directus/prod/config:/var/directus/config
+      - ./directus/prod/storage:/var/directus/public/uploads
     networks:
       - web
       - db_network
@@ -77,8 +77,8 @@ services:
     container_name:  ${CONTAINER_DIRECTUS_NAME_STAGING}
     restart: always
     volumes:
-      - ./directus/prod/storage/config:/var/directus/config
-      - ./directus/prod/storage/uploads:/var/directus/public/uploads
+      - ./directus/prod/config:/var/directus/config
+      - ./directus/prod/storage:/var/directus/public/uploads
     networks:
       - web
       - db_network

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import DirectusSDK from "@directus/sdk-js";
+
 import mockData from "./mockData";
 class AjaxRequests {
     /**
@@ -7,13 +9,26 @@ class AjaxRequests {
      */
     axiosRequest = null;
 
-    init = () => {
+    directusClient = null;
+
+
+    init = async () => {
         this.axiosRequest = axios.create({
             baseURL: process.env.REACT_APP_API_URL
         });
         this.setAxiosHeaders({
             "Content-Type": "application/json"
         });
+        console.log('hey');
+        this.directusClient = new DirectusSDK({
+            project: "_",
+            url: process.env.DIRECTUS_API_URL,
+            email: process.env.DIRECTUS_USER,
+            password: process.env.DIRECTUS_PASSWORD
+        });
+        console.log('hey 2');
+        const test = await this.directusClient.getItems("homes");
+        console.log('test', test);
     };
     setAxiosHeaders = function(headers) {
         const headerKeys = Object.keys(headers);
@@ -25,8 +40,13 @@ class AjaxRequests {
     };
 
     sleep = m => new Promise(r => setTimeout(r, m));
+    getHomes =async ()=> {
+        const test = await this.directusClient.getItems("homes");
+        console.log('test', test);
+        return test;
+    };
     // API REQUESTS
-    getHomes = ()=> {
+    getHomesMock = ()=> {
         return new Promise(async (resolve)=> {
             await this.sleep(10);
             return resolve({data: {homes: mockData.homes }})
