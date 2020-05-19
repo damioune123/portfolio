@@ -16,7 +16,7 @@ class AjaxRequests {
 
     sleep = m => new Promise(r => setTimeout(r, m));
     getHomes = ()=> {
-        return this.directusClient.getItems("homes");
+        return this.directusClient.getItems("homes", {fields: "*, img.data.url"});
     };
     // API REQUESTS
     getHomesMock = ()=> {
