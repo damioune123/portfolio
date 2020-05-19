@@ -77,8 +77,8 @@ services:
     container_name:  ${CONTAINER_DIRECTUS_NAME_STAGING}
     restart: always
     volumes:
-      - ./directus/prod/config:/var/directus/config
-      - ./directus/prod/storage:/var/directus/public/uploads
+      - ./directus/staging/config:/var/directus/config
+      - ./directus/staging/storage:/var/directus/public/uploads
     networks:
       - web
       - db_network
