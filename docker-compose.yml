@@ -53,7 +53,8 @@ services:
     container_name:  ${CONTAINER_DIRECTUS_NAME_PROD}
     restart: always
     volumes:
-      - ./directus/prod/storage:/var/www/html/storage
+      - ./directus/prod/storage/config:/var/directus/config
+      - ./directus/prod/storage/uploads:/var/directus/public/uploads
     networks:
       - web
       - db_network
@@ -62,13 +63,12 @@ services:
       - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_PROD}.entrypoints=secure"
       - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_PROD}.tls.certresolver=letsencrypt"
     environment:
-      - MYSQL_USER=${MYSQL_USER_PROD}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD_PROD}
-      - MYSQL_ENV_MYSQL_DATABASE=${MYSQL_DATABASE_PROD}
-      - MYSQL_PORT_3306_TCP_ADDR=${CONTAINER_DB_NAME_PROD}
-      - MYSQL_PORT_3306_TCP_PORT=3306
-      - MYSQL_ENV_MYSQL_PASSWORD=${MYSQL_PASSWORD_PROD}
-      - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_PROD}
+      - DIRECTUS_ENV=production
+      - DIRECTUS_DATABASE_USERNAME=${MYSQL_USER_PROD}
+      - DIRECTUS_DATABASE_PASSWORD=${MYSQL_PASSWORD_PROD}
+      - DIRECTUS_DATABASE_NAME=${MYSQL_DATABASE_PROD}
+      - DIRECTUS_DATABASE_HOST=${CONTAINER_DB_NAME_PROD}
+      - DIRECTUS_DATABASE_PORT=3306
       - DIRECTUS_AUTH_SECRETKEY=${AUTH_SECRET_DIRECTUS_PROD}
       - DIRECTUS_AUTH_PUBLICKEY=${AUTH_PUBLIC_DIRECTUS_PROD}
     depends_on:
@@ -78,7 +78,8 @@ services:
     container_name:  ${CONTAINER_DIRECTUS_NAME_STAGING}
     restart: always
     volumes:
-      - ./directus/staging/storage:/var/www/html/storage
+      - ./directus/prod/storage/config:/var/directus/config
+      - ./directus/prod/storage/uploads:/var/directus/public/uploads
     networks:
       - web
       - db_network
@@ -87,13 +88,12 @@ services:
       - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_STAGING}.entrypoints=secure"
       - "traefik.http.routers.${CONTAINER_DIRECTUS_NAME_STAGING}.tls.certresolver=letsencrypt"
     environment:
-      - MYSQL_USER=${MYSQL_USER_STAGING}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD_STAGING}
-      - MYSQL_ENV_MYSQL_DATABASE=${MYSQL_DATABASE_STAGING}
-      - MYSQL_PORT_3306_TCP_ADDR=${CONTAINER_DB_NAME_STAGING}
-      - MYSQL_PORT_3306_TCP_PORT=3306
-      - MYSQL_ENV_MYSQL_PASSWORD=${MYSQL_PASSWORD_STAGING}
-      - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_STAGING}
+      - DIRECTUS_ENV=STAGINGuction
+      - DIRECTUS_DATABASE_USERNAME=${MYSQL_USER_STAGING}
+      - DIRECTUS_DATABASE_PASSWORD=${MYSQL_PASSWORD_STAGING}
+      - DIRECTUS_DATABASE_NAME=${MYSQL_DATABASE_STAGING}
+      - DIRECTUS_DATABASE_HOST=${CONTAINER_DB_NAME_STAGING}
+      - DIRECTUS_DATABASE_PORT=3306
       - DIRECTUS_AUTH_SECRETKEY=${AUTH_SECRET_DIRECTUS_STAGING}
       - DIRECTUS_AUTH_PUBLICKEY=${AUTH_PUBLIC_DIRECTUS_STAGING}
     depends_on:
