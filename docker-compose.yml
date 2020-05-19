@@ -71,8 +71,7 @@ services:
       - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_PROD}
       - DIRECTUS_AUTH_SECRETKEY=${AUTH_SECRET_DIRECTUS_PROD}
       - DIRECTUS_AUTH_PUBLICKEY=${AUTH_PUBLIC_DIRECTUS_PROD}
-
-        depends_on:
+    depends_on:
       - mariadb
   directus_staging:
     image: directus/directus:v8-apache
@@ -97,7 +96,6 @@ services:
       - MYSQL_ENV_MYSQL_USER=${MYSQL_USER_STAGING}
       - DIRECTUS_AUTH_SECRETKEY=${AUTH_SECRET_DIRECTUS_STAGING}
       - DIRECTUS_AUTH_PUBLICKEY=${AUTH_PUBLIC_DIRECTUS_STAGING}
-
     depends_on:
       - mariadb
   mariadb:
