@@ -6,3 +6,5 @@ node_modules/
 build/
 .next/
 .env.local
+.env.staging
+.env.prod
