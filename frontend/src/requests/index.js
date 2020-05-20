@@ -21,7 +21,7 @@ class AjaxRequests {
         const { data } = await this.directusClient.getItems("homes", {fields: "*, translations.*, img.data.url"});
         return data.reduce((homes, home)=>{
             homes.push({
-                img: home.img.data.full_url,
+                img: process.env.DIRECTUS_PUBLIC_URL+home.img.data.url,
                 alt: home.alt_img,
                 title: home.translations[0].title,
                 location: home.translations[0].location,
