@@ -91,7 +91,7 @@ const homes = [
     location: "Italy",
     amountRooms: 3,
     surface: 180,
-    price: "600",
+    price: "600,000",
   },
 ];
 

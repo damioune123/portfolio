@@ -13,8 +13,7 @@ function* watchGetHomes() {
 function* callGetHomes() {
     try {
         const response = yield call(request.getHomes);
-        console.log('response', response.data[0].img);
-        yield put(getHomesSuccessAction(response.data));
+        yield put(getHomesSuccessAction(response));
     } catch(error) {
         yield put(getHomesFailureAction(error));
     }

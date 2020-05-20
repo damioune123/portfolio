@@ -15,10 +15,26 @@ class AjaxRequests {
     };
 
     sleep = m => new Promise(r => setTimeout(r, m));
-    getHomes = ()=> {
-        return this.directusClient.getItems("homes", {fields: "*, img.data.url"});
-    };
     // API REQUESTS
+
+    getHomes = async ()=> {
+        const { data } = await this.directusClient.getItems("homes", {fields: "*, translations.*, img.data.url"});
+        return data.reduce((homes, home)=>{
+            homes.push({
+                img: home.img.data.full_url,
+                alt: home.alt_img,
+                title: home.translations[0].title,
+                location: home.translations[0].location,
+                amountRooms: home.amount_rooms,
+                surface: home.surface,
+                price: home.price,
+            });
+            return homes;
+        }, []);
+    };
+
+    // MOCK REQUESTS
+
     getHomesMock = ()=> {
         return new Promise(async (resolve)=> {
             await this.sleep(10);
