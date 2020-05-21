@@ -13,7 +13,7 @@ function* watchGetRealtors() {
 function* callGetRealtors() {
     try {
         const response = yield call(request.getRealtors);
-        yield put(getRealtorsSuccessAction(response.data.realtors));
+        yield put(getRealtorsSuccessAction(response));
     } catch(error) {
         yield put(getRealtorsFailureAction(error));
     }

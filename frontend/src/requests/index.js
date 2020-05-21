@@ -33,21 +33,35 @@ class AjaxRequests {
         }, []);
     };
 
+
+    getRealtors = async ()=> {
+        const { data } = await this.directusClient.getItems("realtors", {fields: "*, img.data.url"});
+        return data.reduce((realtors, realtor)=>{
+            realtors.push({
+                img: process.env.DIRECTUS_PUBLIC_URL+realtor.img.data.url,
+                alt: realtor.alt_img,
+                fullName: realtor.fullname,
+                sold: realtor.amount_houses_sold
+            });
+            return realtors;
+        }, []);
+    };
+
     // MOCK REQUESTS
 
-    getHomesMock = ()=> {
-        return new Promise(async (resolve)=> {
-            await this.sleep(10);
-            return resolve({data: {homes: mockData.homes }})
-        })
-    };
+    // getHomesMock = ()=> {
+    //     return new Promise(async (resolve)=> {
+    //         await this.sleep(10);
+    //         return resolve({data: {homes: mockData.homes }})
+    //     })
+    // };
 
-    getRealtors = ()=> {
-        return new Promise(async (resolve)=> {
-            await this.sleep(10);
-            return resolve({data: {realtors: mockData.realtors }})
-        })
-    };
+    // getRealtors = ()=> {
+    //     return new Promise(async (resolve)=> {
+    //         await this.sleep(10);
+    //         return resolve({data: {realtors: mockData.realtors }})
+    //     })
+    // };
 
     getGalleryItems = ()=> {
         return new Promise(async (resolve)=> {

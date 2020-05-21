@@ -1,15 +1,15 @@
-//HOMES IMG
-const House1Img = "/static/img/house-1.jpeg";
-const House2Img = "/static/img/house-2.jpeg";
-const House3Img = "/static/img/house-3.jpeg";
-const House4Img = "/static/img/house-4.jpeg";
-const House5Img = "/static/img/house-5.jpeg";
-const House6Img = "/static/img/house-6.jpeg";
-
-//REALTORS IMG
-const Realtor1Img = "/static/img/realtor-1.jpeg";
-const Realtor2Img = "/static/img/realtor-2.jpeg";
-const Realtor3Img = "/static/img/realtor-3.jpeg";
+// //HOMES IMG
+// const House1Img = "/static/img/house-1.jpeg";
+// const House2Img = "/static/img/house-2.jpeg";
+// const House3Img = "/static/img/house-3.jpeg";
+// const House4Img = "/static/img/house-4.jpeg";
+// const House5Img = "/static/img/house-5.jpeg";
+// const House6Img = "/static/img/house-6.jpeg";
+//
+// //REALTORS IMG
+// const Realtor1Img = "/static/img/realtor-1.jpeg";
+// const Realtor2Img = "/static/img/realtor-2.jpeg";
+// const Realtor3Img = "/static/img/realtor-3.jpeg";
 
 //METADATA IMG
 const LogoImg = "/static/img/logo.png";
@@ -37,85 +37,85 @@ const Item12Img = "/static/img/gal-12.jpeg";
 const Item13Img = "/static/img/gal-13.jpeg";
 const Item14Img = "/static/img/gal-14.jpeg";
 
-//HOME MOCK DATA
-const homes = [
-  {
-    img: House1Img,
-    alt: "home-1",
-    title: "Beautiful Familiy House",
-    location: "USA",
-    amountRooms: 5,
-    surface: 325,
-    price: "1,200,000",
-  },
-  {
-    img: House2Img,
-    alt: "home-2",
-    title: "Modern Glass Villa",
-    location: "Canada",
-    amountRooms: 6,
-    surface: 450,
-    price: "2,750,000",
-  },
-  {
-    img: House3Img,
-    alt: "home-3",
-    title: "Cozy Country House",
-    location: "Canada",
-    amountRooms: 4,
-    surface: 250,
-    price: "850,000",
-  },
-  {
-    img: House4Img,
-    alt: "home-4",
-    title: "Large Rustical Villa",
-    location: "Portugal",
-    amountRooms: 6,
-    surface: 480,
-    price: "1,950,000",
-  },
-  {
-    img: House5Img,
-    alt: "home-5",
-    title: "Majestic Palace House",
-    location: "Germany",
-    amountRooms: 18,
-    surface: 4230,
-    price: "9,500,000",
-  },
-  {
-    img: House6Img,
-    alt: "home-6",
-    title: "Modern Familiy Apartment",
-    location: "Italy",
-    amountRooms: 3,
-    surface: 180,
-    price: "600,000",
-  },
-];
+// //HOME MOCK DATA
+// const homes = [
+//   {
+//     img: House1Img,
+//     alt: "home-1",
+//     title: "Beautiful Familiy House",
+//     location: "USA",
+//     amountRooms: 5,
+//     surface: 325,
+//     price: "1,200,000",
+//   },
+//   {
+//     img: House2Img,
+//     alt: "home-2",
+//     title: "Modern Glass Villa",
+//     location: "Canada",
+//     amountRooms: 6,
+//     surface: 450,
+//     price: "2,750,000",
+//   },
+//   {
+//     img: House3Img,
+//     alt: "home-3",
+//     title: "Cozy Country House",
+//     location: "Canada",
+//     amountRooms: 4,
+//     surface: 250,
+//     price: "850,000",
+//   },
+//   {
+//     img: House4Img,
+//     alt: "home-4",
+//     title: "Large Rustical Villa",
+//     location: "Portugal",
+//     amountRooms: 6,
+//     surface: 480,
+//     price: "1,950,000",
+//   },
+//   {
+//     img: House5Img,
+//     alt: "home-5",
+//     title: "Majestic Palace House",
+//     location: "Germany",
+//     amountRooms: 18,
+//     surface: 4230,
+//     price: "9,500,000",
+//   },
+//   {
+//     img: House6Img,
+//     alt: "home-6",
+//     title: "Modern Familiy Apartment",
+//     location: "Italy",
+//     amountRooms: 3,
+//     surface: 180,
+//     price: "600,000",
+//   },
+// ];
 
-//REALTORS MOCK DATA
-const realtors = [
-  {
-    img: Realtor1Img,
-    alt: "Realtor 1",
-    fullName: "Erik Feinman",
-    sold: 125
-  },
-  {
-    img: Realtor2Img,
-    alt: "Realtor 2",
-    fullName: "Kim Brown",
-    sold: 284
-  },
-  {
-    img: Realtor3Img,
-    alt: "Realtor 3",
-    fullName: "Toby Ramsey",
-    sold: 254
-  },
-];
+// //REALTORS MOCK DATA
+// const realtors = [
+//   {
+//     img: Realtor1Img,
+//     alt: "Realtor 1",
+//     fullName: "Erik Feinman",
+//     sold: 125
+//   },
+//   {
+//     img: Realtor2Img,
+//     alt: "Realtor 2",
+//     fullName: "Kim Brown",
+//     sold: 284
+//   },
+//   {
+//     img: Realtor3Img,
+//     alt: "Realtor 3",
+//     fullName: "Toby Ramsey",
+//     sold: 254
+//   },
+// ];
 
 //GALERY ITEMS MOCK DATA
 const galleryItems = [
@@ -231,8 +231,8 @@ const metaData = {
 
 };
 export default {
-  homes,
-  realtors,
+  // homes,
+  // realtors,
   galleryItems,
   metaData
 }
