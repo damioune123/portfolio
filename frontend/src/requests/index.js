@@ -33,18 +33,19 @@ class AjaxRequests {
         }, []);
     };
 
-
     getRealtors = async ()=> {
         const { data } = await this.directusClient.getItems("realtors", {fields: "*, img.data.url"});
-        return data.reduce((realtors, realtor)=>{
-            realtors.push({
+        return data.map(realtor=>({
                 img: process.env.DIRECTUS_PUBLIC_URL+realtor.img.data.url,
                 alt: realtor.alt_img,
                 fullName: realtor.fullname,
                 sold: realtor.amount_houses_sold
-            });
-            return realtors;
-        }, []);
+        }));
+    };
+
+    getGalleryItems = async ()=> {
+        const { data } = await this.directusClient.getItems("gallery_items", {fields: "*, img.data.url"});
+        return data.map(galleryItem=> ({img: process.env.DIRECTUS_PUBLIC_URL+galleryItem.img.data.url}));
     };
 
     // MOCK REQUESTS
@@ -63,12 +64,12 @@ class AjaxRequests {
     //     })
     // };
 
-    getGalleryItems = ()=> {
-        return new Promise(async (resolve)=> {
-            await this.sleep(10);
-            return resolve({data: {galleryItems: mockData.galleryItems }})
-        })
-    };
+    // getGalleryItems = ()=> {
+    //     return new Promise(async (resolve)=> {
+    //         await this.sleep(10);
+    //         return resolve({data: {galleryItems: mockData.galleryItems }})
+    //     })
+    // };
 
     getMetaData = ()=> {
         return new Promise(async (resolve)=> {

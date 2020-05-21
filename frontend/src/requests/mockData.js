@@ -21,21 +21,21 @@ const SpriteSvg = "/static/img/sprite.svg";
 const StoryImg1 = "/static/img/story-1.jpeg";
 const StoryImg2 = "/static/img/story-2.jpeg";
 
-//GALLERY ITEMS IMG
-const Item1Img = "/static/img/gal-1.jpeg";
-const Item2Img = "/static/img/gal-2.jpeg";
-const Item3Img = "/static/img/gal-3.jpeg";
-const Item4Img = "/static/img/gal-4.jpeg";
-const Item5Img = "/static/img/gal-5.jpeg";
-const Item6Img = "/static/img/gal-6.jpeg";
-const Item7Img = "/static/img/gal-7.jpeg";
-const Item8Img = "/static/img/gal-8.jpeg";
-const Item9Img = "/static/img/gal-9.jpeg";
-const Item10Img = "/static/img/gal-10.jpeg";
-const Item11Img = "/static/img/gal-11.jpeg";
-const Item12Img = "/static/img/gal-12.jpeg";
-const Item13Img = "/static/img/gal-13.jpeg";
-const Item14Img = "/static/img/gal-14.jpeg";
+// //GALLERY ITEMS IMG
+// const Item1Img = "/static/img/gal-1.jpeg";
+// const Item2Img = "/static/img/gal-2.jpeg";
+// const Item3Img = "/static/img/gal-3.jpeg";
+// const Item4Img = "/static/img/gal-4.jpeg";
+// const Item5Img = "/static/img/gal-5.jpeg";
+// const Item6Img = "/static/img/gal-6.jpeg";
+// const Item7Img = "/static/img/gal-7.jpeg";
+// const Item8Img = "/static/img/gal-8.jpeg";
+// const Item9Img = "/static/img/gal-9.jpeg";
+// const Item10Img = "/static/img/gal-10.jpeg";
+// const Item11Img = "/static/img/gal-11.jpeg";
+// const Item12Img = "/static/img/gal-12.jpeg";
+// const Item13Img = "/static/img/gal-13.jpeg";
+// const Item14Img = "/static/img/gal-14.jpeg";
 
 // //HOME MOCK DATA
 // const homes = [
@@ -117,23 +117,23 @@ const Item14Img = "/static/img/gal-14.jpeg";
 //   },
 // ];
 
-//GALERY ITEMS MOCK DATA
-const galleryItems = [
-  { img: Item1Img },
-  { img: Item2Img },
-  { img: Item3Img },
-  { img: Item4Img },
-  { img: Item5Img },
-  { img: Item6Img },
-  { img: Item7Img },
-  { img: Item8Img },
-  { img: Item9Img },
-  { img: Item10Img },
-  { img: Item11Img },
-  { img: Item12Img },
-  { img: Item13Img },
-  { img: Item14Img },
-];
+// //GALERY ITEMS MOCK DATA
+// const galleryItems = [
+//   { img: Item1Img },
+//   { img: Item2Img },
+//   { img: Item3Img },
+//   { img: Item4Img },
+//   { img: Item5Img },
+//   { img: Item6Img },
+//   { img: Item7Img },
+//   { img: Item8Img },
+//   { img: Item9Img },
+//   { img: Item10Img },
+//   { img: Item11Img },
+//   { img: Item12Img },
+//   { img: Item13Img },
+//   { img: Item14Img },
+// ];
 
 //METADATA MOCK DATA
 const metaData = {
@@ -233,6 +233,6 @@ const metaData = {
 export default {
   // homes,
   // realtors,
-  galleryItems,
+  // galleryItems,
   metaData
 }

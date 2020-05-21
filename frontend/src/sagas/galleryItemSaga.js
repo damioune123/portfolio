@@ -13,7 +13,7 @@ function* watchGetGalleryItems() {
 function* callGetGalleryItems() {
     try {
         const response = yield call(request.getGalleryItems);
-        yield put(getGalleryItemsSuccessAction(response.data.galleryItems));
+        yield put(getGalleryItemsSuccessAction(response));
     } catch(error) {
         yield put(getGalleryItemsFailureAction(error));
     }
