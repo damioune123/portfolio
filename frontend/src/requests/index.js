@@ -1,5 +1,5 @@
 import DirectusSDK from "@directus/sdk-js";
-
+const SpriteSvg = "/static/img/sprite.svg";
 class AjaxRequests {
 
     directusClient;
@@ -104,13 +104,12 @@ class AjaxRequests {
             {fields: "*, icon_svg.data.url, translations.*"}
         );
         const raw = data[0];
-        const svg = process.env.DIRECTUS_PUBLIC_URL+raw.icon_svg.data.url;
         return {
-            heartFullIcon: svg + raw.heart_icon_hlink,
-            mapPinIcon: svg + raw.map_pin_icon_hlink,
-            profileMaleIcon: svg + raw.profile_male_icon_hlink,
-            expandIcon: svg + raw.expand_icon_hlink,
-            keyIcon: svg + raw.key_icon_hlink,
+            heartFullIcon: SpriteSvG + raw.heart_icon_hlink,
+            mapPinIcon: SpriteSvG + raw.map_pin_icon_hlink,
+            profileMaleIcon: SpriteSvG + raw.profile_male_icon_hlink,
+            expandIcon: SpriteSvG + raw.expand_icon_hlink,
+            keyIcon: SpriteSvG + raw.key_icon_hlink,
             btnText: raw.translations[0].btn_text,
         };
     };
@@ -120,10 +119,9 @@ class AjaxRequests {
             {fields: "*, icon_svg.data.url, features.translations.*"}
         );
         const raw = data[0];
-        const svg = process.env.DIRECTUS_PUBLIC_URL+raw.icon_svg.data.url;
         return {
             features: raw.features.map(feature =>({
-                icon: svg+feature.icon_hlink,
+                icon: SpriteSvg + feature.icon_hlink,
                 title: feature.translations[0].title,
                 description: feature.translations[0].description
             }))
