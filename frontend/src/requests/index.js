@@ -15,10 +15,10 @@ class AjaxRequests {
     // API REQUESTS
 
     getHomes = async ()=> {
-        const { data } = await this.directusClient.getItems("homes", {fields: "*, translations.*, img.data.url"});
+        const { data } = await this.directusClient.getItems("homes", {fields: "*, translations.*, img.data.*"});
         return data.reduce((homes, home)=>{
             homes.push({
-                img: process.env.DIRECTUS_PUBLIC_URL+home.img.data.url,
+                img: process.env.DIRECTUS_PUBLIC_URL+home.img.data.thumbnails[5].relative_url,
                 alt: home.alt_img,
                 amountRooms: home.amount_rooms,
                 surface: home.surface,
@@ -31,9 +31,9 @@ class AjaxRequests {
     };
 
     getRealtors = async ()=> {
-        const { data } = await this.directusClient.getItems("realtors", {fields: "*, img.data.url"});
+        const { data } = await this.directusClient.getItems("realtors", {fields: "*, img.data.*"});
         return data.map(realtor=>({
-                img: process.env.DIRECTUS_PUBLIC_URL+realtor.img.data.url,
+                img: process.env.DIRECTUS_PUBLIC_URL+realtor.img.data.thumbnails[6].relative_url,
                 alt: realtor.alt_img,
                 fullName: realtor.fullname,
                 sold: realtor.amount_houses_sold
@@ -41,8 +41,8 @@ class AjaxRequests {
     };
 
     getGalleryItems = async ()=> {
-        const { data } = await this.directusClient.getItems("gallery_items", {fields: "*, img.data.url"});
-        return data.map(galleryItem=> ({img: process.env.DIRECTUS_PUBLIC_URL+galleryItem.img.data.url}));
+        const { data } = await this.directusClient.getItems("gallery_items", {fields: "*, img.data.*"});
+        return data.map(galleryItem=> ({img: process.env.DIRECTUS_PUBLIC_URL+galleryItem.img.data.thumbnails[5].relative_url}));
     };
 
     getMetaData = async ()=> {
@@ -71,14 +71,14 @@ class AjaxRequests {
     getHeaderMetaData = async ()=> {
         const { data } = await this.directusClient.getItems(
             "header_metadata",
-            {fields: "*, logo_img.data.url, translations.*, seen_on_logos.img.data.url, seen_on_logos.alt_img"}
+            {fields: "*, logo_img.data.*, translations.*, seen_on_logos.img.data.*, seen_on_logos.alt_img"}
             );
         const raw = data[0];
         return  {
-            logoImg: process.env.DIRECTUS_PUBLIC_URL+raw.logo_img.data.url,
+            logoImg: process.env.DIRECTUS_PUBLIC_URL+raw.logo_img.data.thumbnails[6].relative_url,
             logoAlt: raw.logo_alt,
             seenOnLogos: raw.seen_on_logos.map(seenOnLogo => ({
-                img: process.env.DIRECTUS_PUBLIC_URL+seenOnLogo.img.data.url,
+                img: process.env.DIRECTUS_PUBLIC_URL+seenOnLogo.img.data.thumbnails[6].relative_url,
                 alt: seenOnLogo.alt_img,
             })),
             heading3: raw.translations[0].heading_3,
@@ -129,7 +129,7 @@ class AjaxRequests {
     getStoriesMetaData = async ()=> {
         const {data} = await this.directusClient.getItems(
             "stories_metadata",
-            {fields: "*, img_1.data.url, img_2.data.url, translations.*"}
+            {fields: "*, img_1.data.url, img_2.data.*, translations.*"}
         );
         const raw = data[0];
         return {
@@ -137,9 +137,9 @@ class AjaxRequests {
             subtitle: raw.translations[0].subtitle,
             quote: raw.translations[0].quote,
             btnText: raw.translations[0].btn_text,
-            img1: process.env.DIRECTUS_PUBLIC_URL+raw.img_1.data.url,
+            img1: process.env.DIRECTUS_PUBLIC_URL+raw.img_1.data.thumbnails[5].relative_url,
             alt1: raw.alt_1,
-            img2: process.env.DIRECTUS_PUBLIC_URL+raw.img_2.data.url,
+            img2: process.env.DIRECTUS_PUBLIC_URL+raw.img_2.data.thumbnails[5].relative_url,
             alt2: raw.alt_2
         };
     };
