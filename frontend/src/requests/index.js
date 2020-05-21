@@ -1,7 +1,5 @@
-import axios from 'axios';
 import DirectusSDK from "@directus/sdk-js";
 
-import mockData from "./mockData";
 class AjaxRequests {
 
     directusClient;
@@ -14,20 +12,20 @@ class AjaxRequests {
         });
     };
 
-    sleep = m => new Promise(r => setTimeout(r, m));
     // API REQUESTS
 
     getHomes = async ()=> {
         const { data } = await this.directusClient.getItems("homes", {fields: "*, translations.*, img.data.url"});
+        console.log(data);
         return data.reduce((homes, home)=>{
             homes.push({
                 img: process.env.DIRECTUS_PUBLIC_URL+home.img.data.url,
                 alt: home.alt_img,
-                title: home.translations[0].title,
-                location: home.translations[0].location,
                 amountRooms: home.amount_rooms,
                 surface: home.surface,
                 price: home.price,
+                title: home.translations[0].title,
+                location: home.translations[0].location,
             });
             return homes;
         }, []);
@@ -48,36 +46,106 @@ class AjaxRequests {
         return data.map(galleryItem=> ({img: process.env.DIRECTUS_PUBLIC_URL+galleryItem.img.data.url}));
     };
 
-    // MOCK REQUESTS
-
-    // getHomesMock = ()=> {
-    //     return new Promise(async (resolve)=> {
-    //         await this.sleep(10);
-    //         return resolve({data: {homes: mockData.homes }})
-    //     })
-    // };
-
-    // getRealtors = ()=> {
-    //     return new Promise(async (resolve)=> {
-    //         await this.sleep(10);
-    //         return resolve({data: {realtors: mockData.realtors }})
-    //     })
-    // };
-
-    // getGalleryItems = ()=> {
-    //     return new Promise(async (resolve)=> {
-    //         await this.sleep(10);
-    //         return resolve({data: {galleryItems: mockData.galleryItems }})
-    //     })
-    // };
-
-    getMetaData = ()=> {
-        return new Promise(async (resolve)=> {
-            await this.sleep(10);
-            return resolve({data: {metaData: mockData.metaData }})
-        })
+    getMetaData = async ()=> {
+        const [
+            headerMetaData,
+            realtorMetaData,
+            homeMetaData,
+            featuresMetaData,
+            storyMetaData
+        ] = await Promise.all([
+            this.getHeaderMetaData(),
+            this.getRealtorsMetaData(),
+            this.getHomesMetaData(),
+            this.getFeaturesMetaData(),
+            this.getStoriesMetaData()
+        ]);
+        return {
+            headerMetaData,
+            realtorMetaData,
+            homeMetaData,
+            featuresMetaData,
+            storyMetaData
+        };
     };
 
+    getHeaderMetaData = async ()=> {
+        const { data } = await this.directusClient.getItems(
+            "header_metadata",
+            {fields: "*, logo_img.data.url, translations.*, seen_on_logos.img.data.url, seen_on_logos.alt_img"}
+            );
+        const raw = data[0];
+        return  {
+            logoImg: process.env.DIRECTUS_PUBLIC_URL+raw.logo_img.data.url,
+            logoAlt: raw.logo_alt,
+            seenOnLogos: raw.seen_on_logos.map(seenOnLogo => ({
+                img: process.env.DIRECTUS_PUBLIC_URL+seenOnLogo.img.data.url,
+                alt: seenOnLogo.alt_img,
+            })),
+            heading3: raw.translations[0].heading_3,
+            heading1: raw.translations[0].heading_1,
+            btnText: raw.translations[0].btn_text,
+            seenOnText: raw.translations[0].seen_on_text,
+        };
+    };
+    getRealtorsMetaData = async ()=> {
+        const { data } = await this.directusClient.getItems(
+            "realtors_metadata",
+            {fields: "*, translations.*"}
+            );
+        const raw = data[0];
+        return  {
+            housesSoldText: raw.translations[0].houses_sold_text,
+        };
+    };
+    getHomesMetaData = async ()=> {
+        const {data} = await this.directusClient.getItems(
+            "homes_metadata",
+            {fields: "*, icon_svg.data.url, translations.*"}
+        );
+        const raw = data[0];
+        const svg = process.env.DIRECTUS_PUBLIC_URL+raw.icon_svg.data.url;
+        return {
+            heartFullIcon: svg + raw.heart_icon_hlink,
+            mapPinIcon: svg + raw.map_pin_icon_hlink,
+            profileMaleIcon: svg + raw.profile_male_icon_hlink,
+            expandIcon: svg + raw.expand_icon_hlink,
+            keyIcon: svg + raw.key_icon_hlink,
+            btnText: raw.translations[0].btn_text,
+        };
+    };
+    getFeaturesMetaData = async ()=> {
+        const {data} = await this.directusClient.getItems(
+            "features_metadata",
+            {fields: "*, icon_svg.data.url, features.translations.*"}
+        );
+        const raw = data[0];
+        const svg = process.env.DIRECTUS_PUBLIC_URL+raw.icon_svg.data.url;
+        return {
+            features: raw.features.map(feature =>({
+                icon: svg+feature.icon_hlink,
+                title: feature.translations[0].title,
+                description: feature.translations[0].description
+            }))
+        };
+    };
+    getStoriesMetaData = async ()=> {
+        const {data} = await this.directusClient.getItems(
+            "stories_metadata",
+            {fields: "*, img_1.data.url, img_2.data.url, translations.*"}
+        );
+        const raw = data[0];
+        return {
+            title: raw.translations[0].title,
+            subtitle: raw.translations[0].subtitle,
+            quote: raw.translations[0].quote,
+            btnText: raw.translations[0].btn_text,
+            img1: process.env.DIRECTUS_PUBLIC_URL+raw.img_1.data.url,
+            alt1: raw.alt_1,
+            img2: process.env.DIRECTUS_PUBLIC_URL+raw.img_2.data.url,
+            alt2: raw.alt_2
+        };
+    };
 }
 const ajaxRequest = new AjaxRequests();
 ajaxRequest.init();

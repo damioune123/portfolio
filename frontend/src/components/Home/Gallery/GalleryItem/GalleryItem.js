@@ -12,7 +12,7 @@ class GalleryItem extends Component{
         }
         return(
             <figure className={`gallery__item gallery__item--${this.props.id}`}>
-                <img src={this.props.img} alt={`${metaData.galleryItemMetaData.altBase} ${this.props.id}`} className="gallery__img"/>
+                <img src={this.props.img} alt={`${this.props.id}`} className="gallery__img"/>
             </figure>
         );
     }
