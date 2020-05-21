@@ -13,7 +13,6 @@ function* watchGetMetaData() {
 function* callGetMetaData() {
     try {
         const response = yield call(request.getMetaData);
-        //console.log(response);
         yield put(getMetaDataSuccessAction(response));
     } catch(error) {
         yield put(getMetaDataFailureAction(error));

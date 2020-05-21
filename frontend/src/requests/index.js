@@ -16,7 +16,6 @@ class AjaxRequests {
 
     getHomes = async ()=> {
         const { data } = await this.directusClient.getItems("homes", {fields: "*, translations.*, img.data.url"});
-        console.log(data);
         return data.reduce((homes, home)=>{
             homes.push({
                 img: process.env.DIRECTUS_PUBLIC_URL+home.img.data.url,
@@ -101,22 +100,22 @@ class AjaxRequests {
     getHomesMetaData = async ()=> {
         const {data} = await this.directusClient.getItems(
             "homes_metadata",
-            {fields: "*, icon_svg.data.url, translations.*"}
+            {fields: "*, translations.*"}
         );
         const raw = data[0];
         return {
-            heartFullIcon: SpriteSvG + raw.heart_icon_hlink,
-            mapPinIcon: SpriteSvG + raw.map_pin_icon_hlink,
-            profileMaleIcon: SpriteSvG + raw.profile_male_icon_hlink,
-            expandIcon: SpriteSvG + raw.expand_icon_hlink,
-            keyIcon: SpriteSvG + raw.key_icon_hlink,
+            heartFullIcon: SpriteSvg + raw.heart_icon_hlink,
+            mapPinIcon: SpriteSvg + raw.map_pin_icon_hlink,
+            profileMaleIcon: SpriteSvg + raw.profile_male_icon_hlink,
+            expandIcon: SpriteSvg + raw.expand_icon_hlink,
+            keyIcon: SpriteSvg + raw.key_icon_hlink,
             btnText: raw.translations[0].btn_text,
         };
     };
     getFeaturesMetaData = async ()=> {
         const {data} = await this.directusClient.getItems(
             "features_metadata",
-            {fields: "*, icon_svg.data.url, features.translations.*"}
+            {fields: "*, features.translations.*, features.*"}
         );
         const raw = data[0];
         return {
