@@ -25,6 +25,16 @@ class Index extends React.Component {
         store.dispatch(getGalleryItemsAction())
     ]);
   }
+    static async getStaticProps(props) {
+        const { store } = props.ctx;
+        await request.init();
+        await Promise.all([
+            store.dispatch(getMetaDataAction()),
+            store.dispatch(getHomesAction()),
+            store.dispatch(getRealtorsAction()),
+            store.dispatch(getGalleryItemsAction())
+        ]);
+    }
   render() {
     return (
         <div className="container">

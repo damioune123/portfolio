@@ -7,7 +7,10 @@ export default class MyDocument extends Document {
     const initialProps = await Document.getInitialProps(ctx)
     return { ...initialProps }
   }
-
+    static async getStaticProps(ctx) {
+        const initialProps = await Document.getInitialProps(ctx)
+        return { ...initialProps }
+    }
   render() {
     return (
       <html>
