@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import compose from "recompose/compose";
 import {connect} from "react-redux";
 import Loader from "../../Loader/Loader";
+import ImageLoader from "../../Loader/ImageLoader";
 const mapStateToProps = (state) => ({...state.metaData});
 class Story extends Component{
     render(){
@@ -14,9 +15,17 @@ class Story extends Component{
         }
         return(
             <React.Fragment>
-                <div className="story__pictures">
-                    <img src={metaData.storyMetaData.img1} alt={metaData.storyMetaData.alt1} className="story__img--1"/>
-                    <img src={metaData.storyMetaData.img2} alt={metaData.storyMetaData.alt2} className="story__img--2"/>
+                <div className="story__pictures" >
+                    <ImageLoader
+                        className="story__img--1"
+                        src={metaData.storyMetaData.img1}
+                        alt={metaData.storyMetaData.alt1}
+                    />
+                    <ImageLoader
+                        className="story__img--2"
+                        src={metaData.storyMetaData.img2}
+                        alt={metaData.storyMetaData.alt2}
+                    />
                 </div>
                 <div className="story__content">
                     <h3 className="heading-3 mb-sm">{metaData.storyMetaData.title}</h3>

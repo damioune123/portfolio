@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import compose from "recompose/compose";
 import {connect} from "react-redux";
+import ImageLoader from "../../../Loader/ImageLoader";
 
 const mapStateToProps = (state) => ({...state.metaData});
 class GalleryItem extends Component{
@@ -12,7 +13,11 @@ class GalleryItem extends Component{
         }
         return(
             <figure className={`gallery__item gallery__item--${this.props.id}`}>
-                <img src={this.props.img} alt={`${this.props.id}`} className="gallery__img"/>
+                <ImageLoader
+                    src={this.props.img}
+                    alt={`${this.props.id}`}
+                    className="gallery__img"
+                />
             </figure>
         );
     }

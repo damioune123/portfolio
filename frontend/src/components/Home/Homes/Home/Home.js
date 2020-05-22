@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import compose from "recompose/compose";
 import {connect} from "react-redux";
+import ImageLoader from "../../../Loader/ImageLoader";
 
 const mapStateToProps = (state) => ({...state.metaData});
 class Home extends Component{
@@ -11,7 +12,10 @@ class Home extends Component{
         }
         return(
             <div className="home">
-                <img src={this.props.img} alt={this.props.img} className="home__img"/>
+                <ImageLoader
+                    src={this.props.img}
+                    className="home__img"
+                />
                 <svg className="home__like">
                     <use xlinkHref={metaData.homeMetaData.heartFullIcon}></use>
                 </svg>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import compose from "recompose/compose";
 import {connect} from "react-redux";
+import ImageLoader from "../../../../Loader/ImageLoader";
 const mapStateToProps = (state) => ({...state.metaData});
 class Realtor extends Component{
     render(){
@@ -10,7 +11,10 @@ class Realtor extends Component{
         }
         return(
             <div >
-                <img src={this.props.img} alt={this.props.alt} className="realtors__img"/>
+                <ImageLoader
+                    src={this.props.img}
+                    className="realtors__img"
+                />
                 <div className="realtors__details">
                     <h4 className="heading-4 heading-4--light">{this.props.fullname}</h4>
                     <p className="realtors__sold">{this.props.sold} {metaData.realtorMetaData.housesSoldText}</p>
