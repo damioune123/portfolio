@@ -3,7 +3,7 @@ STAGING_STORAGE_FOLDER=/staging
 PROD_STORAGE_FOLDER=/prod
 
 echo "Replacing prod storage with staging storage"
-rm -rfv $PROD_STORAGE_FOLDER/* && cp -rv $STAGING_STORAGE_FOLDER/* $PROD_STORAGE_FOLDER/*
+rm -rfv ${PROD_STORAGE_FOLDER}/* && cp -rv ${STAGING_STORAGE_FOLDER}/* ${PROD_STORAGE_FOLDER}/*
 echo "Showing running docker containers"
 docker ps
 echo "Connecting to mariadb and run the migration"
