@@ -12,6 +12,7 @@ services:
       - "traefik.http.routers.traefik.entrypoints=secure"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.admin-basicauth.basicauth.usersfile=/admin-users.txt"
     environment:
       - "OVH_ENDPOINT=${OVH_ENDPOINT}"
       - "OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}"
