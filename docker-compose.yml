@@ -141,7 +141,20 @@ services:
       - ./buggy/runners/:/app/conf/runners
       - ./buggy/scripts/:/app/scripts/
       - /var/run/docker.sock:/var/run/docker.sock
-
+  cadvisor:
+    image: google/cadvisor:v0.29.0
+    restart: always
+    networks:
+      - web
+    labels:
+      - "traefik.http.routers.cadvisor.rule=Host(`${DOMAIN_CADVISOR}`)"
+      - "traefik.http.routers.cadvisor.entrypoints=secure"
+      - "traefik.http.routers.cadvisor.tls.certresolver=letsencrypt"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
 volumes:
   db:
 
