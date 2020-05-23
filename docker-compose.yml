@@ -150,6 +150,7 @@ services:
       - "traefik.http.routers.cadvisor.rule=Host(`${DOMAIN_CADVISOR}`)"
       - "traefik.http.routers.cadvisor.entrypoints=secure"
       - "traefik.http.routers.cadvisor.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.test-auth.basicauth.users=admin:$$apr1$$oeDD1ksd$$BYWK6I1OcuPCOTdUaZx2T."
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
