@@ -1,3 +1,3 @@
 [http.middlewares]
   [http.middlewares.admin-basicauth.basicAuth]
-    usersFile = "../../admin-users"
+    usersFile = "/admin-users.txt"

@@ -23,6 +23,7 @@ services:
       - "./traefik/traefik.toml:/traefik.toml"
       - "./traefik/letsencrypt:/letsencrypt/"
       - "./traefik/dynamic:/dynamic/"
+      - "./traefik/admin-users.txt:/admin-users.txt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
   express_prod:
     build:
