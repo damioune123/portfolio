@@ -123,15 +123,24 @@ services:
       - web
     depends_on:
       - mariadb
-  whoami:
-    image: "containous/whoami"
-    container_name: "simple-service"
+  buggy-scripts:
+    build:
+      context: ./buggy
+      dockerfile: Dockerfile
+    container_name: "buggy-scripts"
+    depends_on:
+      - express_prod
     networks:
       - web
     labels:
-      - "traefik.http.routers.whoami.rule=Host(`${DOMAIN_WHOAMI}`)"
-      - "traefik.http.routers.whoami.entrypoints=secure"
-      - "traefik.http.routers.whoami.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.buggy-scripts.rule=Host(`${DOMAIN_BUGGY}`)"
+      - "traefik.http.routers.buggy-scripts.entrypoints=secure"
+      - "traefik.http.routers.buggy-scripts.tls.certresolver=letsencrypt"
+    volumes:
+      - ./buggy/conf.json:/app/conf/conf.json
+      - ./buggy/runners/:/app/conf/runners
+      - ./buggy/scripts/:/app/scripts/
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   db:
