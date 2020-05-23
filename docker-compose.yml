@@ -145,6 +145,8 @@ services:
       - ./buggy/conf.json:/app/conf/conf.json
       - ./buggy/runners/:/app/conf/runners
       - ./buggy/scripts/:/app/scripts/
+      - ./directus/prod/storage:/prod
+      - ./directus/staging/storage:/staging
       - /var/run/docker.sock:/var/run/docker.sock
   cadvisor:
     image: google/cadvisor:v0.29.0
