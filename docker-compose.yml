@@ -12,6 +12,7 @@ services:
       - "traefik.http.routers.traefik.entrypoints=secure"
       - "traefik.http.routers.traefik.service=api@internal"
       - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.admin-basicauth.basicauth.usersfile=./admin-users"
     environment:
       - "OVH_ENDPOINT=${OVH_ENDPOINT}"
       - "OVH_APPLICATION_KEY=${OVH_APPLICATION_KEY}"
@@ -150,7 +151,7 @@ services:
       - "traefik.http.routers.cadvisor.rule=Host(`${DOMAIN_CADVISOR}`)"
       - "traefik.http.routers.cadvisor.entrypoints=secure"
       - "traefik.http.routers.cadvisor.tls.certresolver=letsencrypt"
-      - "traefik.http.middlewares.test-auth.basicauth.usersfile=./admin-users"
+      - "traefik.http.routers.cadvisor.middlewares=admin-basicauth"
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
